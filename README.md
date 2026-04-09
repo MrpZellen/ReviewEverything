@@ -3,7 +3,7 @@
 ## How To Commit:
 Developers of this project must follow our github structure, that is defined below:
 ### 1. Create a local branch off of the existing prod branch to kick off development.
-This means just having the repo cloned to your machine. Clone it with the following command:
+This means just having the repo cloned to your machine. Clone it with the following command inside of your current chosen directory:
 
 ```git clone https://github.com/MrpZellen/ReviewEverything```
 
