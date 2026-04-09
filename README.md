@@ -13,7 +13,7 @@ I will list our specifications here after our in class discussion on Thursday.
 [Check Features here](https://trello.com/b/ETpF5e4f/dev-team)
 
 <img width="1591" height="723" alt="image" src="https://github.com/user-attachments/assets/ea7c8d4e-3e6b-42e0-9d35-f70e7b2d4882" />
-using this information, define a name following these rules:
+using this information, define a **BRANCH NAME** following these rules:
  - Prefix with 'feature-', 'bugfix-', or 'hotfix-'.
  - follow it with feature name/bug ticket #. if it's a bug, ensure you use the number tied to it inside of our Trello.
 Examples include:
@@ -30,8 +30,8 @@ We will be following a rebase practice first. So to properly rebase the branch o
 ```git rebase --i OTHER-BRANCH-NAME```
 
 However, if you have multiple personal commits for one feature, (i.e. registration backend, registration frontend) **please squash**. Using the same command above, you want to then change the listed items from all 'pick' to jus tthe first one being prefixed with 'pick' and the rest being prefixed 's'. This will squash all older commits except the latest commit **into the latest commit, then rebase the branch**. Make sure you keep the first in the list as 'pick' as to not lose progress.
-### for example:
-assuming below you have the following list on git rebase -i:
+### For example:
+Assuming below you have the following list on git rebase -i:
 
 ```
 pick commit_id New Thing
@@ -40,7 +40,7 @@ pick commit_id New Thing 3
 pick commit_id New Thing 4
 ```
 
-you can squash them all by editing the file to instead be formatted the following:
+You can squash them all by editing the file to instead be formatted the following:
 
 ```
 pick commit_id New Thing
@@ -49,5 +49,5 @@ s commit_id New Thing 3
 s commit_id New Thing 4
 ```
 
-this will squash all the older commits into the top commit, and keep the name of that commit (being New Thing).
+This will squash all the older commits into the top commit, and keep the name of that commit (being New Thing).
 Then, the rebase will proceed. You will have another popup to optionally change your commit message, which is recommended but not required.
