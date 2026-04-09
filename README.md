@@ -24,12 +24,12 @@ feature-registration
 bugfix-000
 bugfix-013
 ```
-### 4. once finished with your work, do not PUSH.
-We will be following a rebase practice first. So to properly rebase the branch once you are done, use this command, then just save without edits to the pick order.
+### 4. Once finished with your work, do not PUSH directly to PROD or STAGING.
+We will be following a **rebase practice first.** So to properly rebase the branch once you are done, use this command, then just save without edits to the pick order.
 
-```git rebase --i OTHER-BRANCH-NAME```
+```git rebase --i staging```
 
-However, if you have multiple personal commits for one feature, (i.e. registration backend, registration frontend) **please squash**. Using the same command above, you want to then change the listed items from all 'pick' to jus tthe first one being prefixed with 'pick' and the rest being prefixed 's'. This will squash all older commits except the latest commit **into the latest commit, then rebase the branch**. Make sure you keep the first in the list as 'pick' as to not lose progress.
+However, if you have multiple personal commits for one feature, (i.e. registration backend, registration frontend) **please squash**. Using the same command above, you want to then change the listed items from all 'pick' to just the first one being prefixed with 'pick' and the rest being prefixed 's'. This will squash all older commits except the latest commit **into the latest commit, then rebase the branch**. Make sure you keep the first in the list as 'pick' as to not lose progress.
 ### For example:
 Assuming below you have the following list on git rebase -i:
 
@@ -51,3 +51,5 @@ s commit_id New Thing 4
 
 This will squash all the older commits into the top commit, and keep the name of that commit (being New Thing).
 Then, the rebase will proceed. You will have another popup to optionally change your commit message, which is recommended but not required.
+
+In Staging, we will define reviews or tests needed to push to PROD. This will be fast at first, but will take more work as the project develops. This will guarantee a secure Prod, though.
