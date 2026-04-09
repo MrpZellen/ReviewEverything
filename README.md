@@ -13,9 +13,12 @@ I will list our specifications here after our in class discussion on Thursday.
 [Check Features here](https://trello.com/b/ETpF5e4f/dev-team)
 
 <img width="1591" height="723" alt="image" src="https://github.com/user-attachments/assets/ea7c8d4e-3e6b-42e0-9d35-f70e7b2d4882" />
-using this information, define a **BRANCH NAME** following these rules:
+using this information, define a **branch name** following these rules:
+
  - Prefix with 'feature-', 'bugfix-', or 'hotfix-'.
+
  - follow it with feature name/bug ticket #. if it's a bug, ensure you use the number tied to it inside of our Trello.
+
 Examples include:
 
 ```
