@@ -7,11 +7,14 @@
     "dev": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "seed": "node seeder.js"
   },
   "dependencies": {
     "express": "^5.2.1",
     "jest": "^30.3.0",
+    "mongo": "^0.1.0",
+    "pg": "^8.20.0",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
