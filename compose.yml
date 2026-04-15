@@ -26,7 +26,7 @@ services:
       - MONGODB_INITDB_ROOT_PASSWORD=admin
       - MONGODB_INITDB_DATABASE=reviewdb
     ports:
-      - 27017:27017
+      - "27017:27017"
     volumes:
       - ./init:/docker-entrypoint-initdb.d
       - db:/data/db
@@ -35,6 +35,8 @@ services:
   # official postgres docker compose config.
   userDB:
     image: postgres
+    ports:
+    - "5400:5432"
     # set shared memory limit when using docker compose
     shm_size: 128mb
     environment:

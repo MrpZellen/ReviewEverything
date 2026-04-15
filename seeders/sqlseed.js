@@ -1,14 +1,6 @@
 import pkg from 'pg';
 const { Client } = pkg;
 
-const client = new Client({
-  host:     'localhost',
-  port:     5432,
-  database: 'postgres',
-  user:     'postgres',
-  password: 'admin',
-});
-
 const users = [
   {
     username:     'grubulon_schmeeze',
@@ -31,8 +23,17 @@ const users = [
 ];
 
 export async function runSQL() {
+  const client = new Client({
+      host:     'localhost',
+      port:     5400,
+      database: 'postgres',
+      user:     'postgres',
+      password: 'admin',
+    });
   try {
+    console.log('Connecting...');
     await client.connect();
+    console.log('Connected.');
 
     await client.query(`
       CREATE TABLE IF NOT EXISTS users (
@@ -44,18 +45,23 @@ export async function runSQL() {
       );
     `);
 
+    console.log('Table ensured.');
+
     for (const user of users) {
-      await client.query(
+      const result = await client.query(
         `INSERT INTO users (username, description, "movieReviews", "isAdmin")
-         VALUES ($1, $2, $3, $4)`,
+         VALUES ($1, $2, $3, $4)
+         ON CONFLICT (username) DO NOTHING`,
         [user.username, user.description, user.movieReviews, user.isAdmin]
       );
+
+      console.log(user.username, '-> inserted:', result.rowCount);
     }
 
-    console.log('User seeder complete.');
+    console.log('Seeder done.');
+  } catch (err) {
+    console.error('ERROR:', err);
   } finally {
     await client.end();
   }
 }
-
-runSQL()

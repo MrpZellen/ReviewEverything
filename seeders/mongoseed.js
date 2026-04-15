@@ -1,14 +1,7 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
 
-const uri = 'mongodb://admin:admin@mongodb:27017/reviewdb';
+const uri = 'mongodb://admin:admin@localhost:27017/reviewdb?authSource=admin';
 
-const client = new MongoClient(uri, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  },
-});
 
 const reviews = [
   {
@@ -44,6 +37,15 @@ const reviews = [
 ];
 
 export async function runMongo() {
+  var result;
+
+  const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  },
+});
   try {
     await client.connect();
     const myDB = client.db("reviewdb");
@@ -52,10 +54,10 @@ export async function runMongo() {
       await myDB.createCollection("reviews");
     }
     const myColl = myDB.collection("reviews");
-    const result = await myColl.insertMany(reviews);
-    return result;
+    result = await myColl.insertMany(reviews);
   } finally {
     await client.close();
+    return result;
   }
 }
 
