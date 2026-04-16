@@ -1,0 +1,59 @@
+services:
+  webpage:
+    build:
+    # not normally recommended to have root context, but we don't plan any other containers right now. 
+    # TODO: Refactor as needed for the future, IF any additional manual containers planned.
+      context: .
+      dockerfile: Dockerfile
+    container_name: webpage
+    ports:
+    - "5173:5173"
+    - "3100:3100" #TODO: establish express port as 3100, or update here.
+    environment:
+      - MONGOPASS=admin
+      - MONGOUSER=userDB
+      - POSTGRESPASS=admin
+    #TODO: add volumes if needed.
+    depends_on:
+      - mongodb
+      - userDB
+# this service below is from official Mongo, but changed the image away from Atlas (web hosted)
+  mongodb:
+    image: mongodb/mongodb-community-server
+    hostname: mongodb
+    environment:
+      - MONGODB_INITDB_ROOT_USERNAME=admin
+      - MONGODB_INITDB_ROOT_PASSWORD=admin
+      - MONGODB_INITDB_DATABASE=reviewdb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - db:/data/db
+      - configdb:/data/configdb
+      - mongot:/data/mongot
+  # official postgres docker compose config.
+  userDB:
+    image: postgres
+    ports:
+    - "5400:5432"
+    # set shared memory limit when using docker compose
+    shm_size: 128mb
+    environment:
+      POSTGRES_PASSWORD: admin
+  #DB viewer VIA postgres. Changed requisite to remove auto-restart.
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+    #pass is admin, user is postgres.
+    # server is userDB, db is postgres.
+    depends_on:
+      - userDB
+  #DB viewer VIA mongodb is removed. Mongo Express was deprecated for a Docker desktop app.
+  # to install, add the MongoDB Express extension to view directly in Docker Desktop.
+  # OR, use mongosh via docker exec.
+volumes:
+  db:
+  configdb:
+  mongot:
