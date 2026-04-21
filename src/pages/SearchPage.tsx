@@ -27,18 +27,32 @@ export default function SearchPage(){
     }, []);
 
     const handleSearch = async () => {
+        if(!query.trim()){
+            alert("Please enter a search term");
+            return;
+        }
         setSearched(true);
         try{
             let url = "";
             if(selectedGenre){
-                url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${selectedGenre}`;
+                url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${selectedGenre}&sort_by=popularity.desc`;
+            }else{
+                const personRes = await fetch(`https://api.themoviedb.org/3/search/person?api_key=${API_KEY}&sort_by=popularity.desc`);
+                const personData = await personRes.json();
+                const actorId = personData.results?.[0]?.id;
+
+                if(actorId){
+                    url =  `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_cast=${actorId}`;
+                }else{
+                    url =  `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`;
+                }
             }
-            else if(query.trim()){
-                url =   `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`;
-            }
+
             if(!url) return;
+
             const res = await fetch(url);
             const data = await res.json();
+
             setResults(data.results || []);
         }catch(err){
             console.log(err);
@@ -74,6 +88,12 @@ export default function SearchPage(){
                 {results.map((movie) => (
                     <div key={movie.id}>
                         <p>{movie.title}</p>
+                        {movie.poster_path && (
+                            <img 
+                            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                            alt={movie.title}
+                            />
+                        )}
                     </div>
                 ))}
             </div>
