@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function SearchPage(){
+export default function SearchPage() {
     const [query, setQuery] = useState("");
     const [results, setResults] = useState<any[]>([]);
     const [searched, setSearched] = useState(false);
@@ -13,13 +13,13 @@ export default function SearchPage(){
 
     useEffect(() => {
         const fetchGenres = async () => {
-            try{
+            try {
                 const res = await fetch(
                     `https://api.themoviedb.org/3/genre/movie/list?api_key=${API_KEY}`
                 );
                 const data = await res.json();
                 setGenres(data.genres || []);
-            }catch(err){
+            } catch (err) {
                 console.error(err);
             }
         };
@@ -31,34 +31,57 @@ export default function SearchPage(){
             alert("Please enter a search term");
             return;
         }
-        setSearched(true);
-        try{
-            let url = "";
-            if(selectedGenre){
-                url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${selectedGenre}&sort_by=popularity.desc`;
-            }else{
-                const personRes = await fetch(`https://api.themoviedb.org/3/search/person?api_key=${API_KEY}&sort_by=popularity.desc`);
-                const personData = await personRes.json();
-                const actorId = personData.results?.[0]?.id;
 
-                if(actorId){
-                    url =  `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_cast=${actorId}`;
-                }else{
-                    url =  `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`;
+        setSearched(true);
+
+        try{
+            let finalResults: any[] = [];
+
+            if(selectedGenre){
+                const res = await fetch(
+                    `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${selectedGenre}&sort_by=popularity.desc`
+                );
+                const data = await res.json();
+                finalResults = data.results || [];
+            }else{
+                const movieRes = await fetch(
+                    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${query}`
+                );
+                const movieData = await movieRes.json();
+
+                const personRes = await fetch(
+                    `https://api.themoviedb.org/3/search/person?api_key=${API_KEY}&query=${query}`
+                );
+                const personData = await personRes.json();
+
+                const actor = personData.results?.find(
+                    (p: any) => p.known_for_department === "Acting"
+                );
+
+                if(actor && query.includes(" ")){
+                    const actorId = actor.id;
+
+                    const actorMovieRes = await fetch(
+                        `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_cast=${actorId}&sort_by=popularity.desc&page=1`
+                    );
+                    const actorMovieData = await actorMovieRes.json();
+
+                    finalResults = actorMovieData.results || [];
+                }else if(movieData.results && movieData.results.length > 0){
+                    const filtered = movieData.results.filter((movie: any) => 
+                        movie.title.toLowerCase().includes(query.toLowerCase())
+                    );
+
+                    finalResults = filtered.length > 0 ? filtered : movieData.results;
                 }
             }
-
-            if(!url) return;
-
-            const res = await fetch(url);
-            const data = await res.json();
-
-            setResults(data.results || []);
+            setResults(finalResults);
         }catch(err){
-            console.log(err);
+            console.error(err);
             setResults([]);
         }
     };
+
     return (
         <div>
             <h1>Movie Search</h1>
@@ -89,9 +112,9 @@ export default function SearchPage(){
                     <div key={movie.id}>
                         <p>{movie.title}</p>
                         {movie.poster_path && (
-                            <img 
-                            src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
-                            alt={movie.title}
+                            <img
+                                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                                alt={movie.title}
                             />
                         )}
                     </div>
