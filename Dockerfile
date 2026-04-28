@@ -17,3 +17,8 @@ EXPOSE 3100
 RUN npm install -g concurrently
 
 CMD ["concurrently", "npm run dev", "node server/index.js"]
+COPY package*.json ./
+RUN npm install 
+COPY . .
+
+CMD ["npm", "run", "dev"]

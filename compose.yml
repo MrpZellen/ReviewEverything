@@ -18,6 +18,8 @@ services:
       - mongodb
       - userDB
 # this service below is from official Mongo, but changed the image away from Atlas (web hosted)
+      - "5173:5173"
+      - "3100:3100"
   mongodb:
     image: mongodb/mongodb-community-server
     hostname: mongodb
@@ -25,6 +27,8 @@ services:
       - MONGODB_INITDB_ROOT_USERNAME=admin
       - MONGODB_INITDB_ROOT_PASSWORD=admin
       - MONGODB_INITDB_DATABASE=reviewdb
+      -   MONGO_INITDB_ROOT_USERNAME=admin
+      -   MONGO_INITDB_ROOT_PASSWORD=admin
     ports:
       - "27017:27017"
     volumes:

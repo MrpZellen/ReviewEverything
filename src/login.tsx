@@ -4,9 +4,19 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [userName, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
+    
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        if (!email || !userName || !password) {
+            setError('Please fill in all fields before logging in.');
+            return;
+        }
+
+        setError('');
+        alert('Login successful!');
         console.log('Login attempt:', { email, userName, password });
     };
 
@@ -21,8 +31,19 @@ const Login = () => {
                         Sign in to your account
                     </p>
                 </div>
+                {error && (
+                    <div style={{
+                        color: 'red',
+                        marginBottom: '15px',
+                        padding: '10px',
+                        border: '1px solid red',
+                        borderRadius: '4px'
+                    }}>
+                        {error}
+                    </div>
+                )}
 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} noValidate>
                     <div>
                         <label>
                             Email
