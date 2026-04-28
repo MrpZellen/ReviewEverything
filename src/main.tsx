@@ -8,6 +8,6 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Login />
     <SearchPage/>
-    {/* Temporary placement for testing */}
+    {/* <App/> */}
   </StrictMode>,
 )
