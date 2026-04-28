@@ -9,5 +9,7 @@ createRoot(document.getElementById('root')!).render(
     <Login />
     {/* <SearchPage/> */}
     {/* Temporary placement for testing */}
+    <SearchPage/>
+    {/* <App/> */}
   </StrictMode>,
 )
