@@ -1,0 +1,44 @@
+services:
+  webpage:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: webpage
+    ports:
+      - "5173:5173"
+      - "3100:3100"
+    environment:
+     - MONGOPASS=admin
+     - MONGOUSER=userDB
+     - POSTGRESPASS=admin
+    depends_on:
+      - mongodb
+      - userDB
+  mongodb:
+    image: mongodb/mongodb-community-server
+    hostname: mongodb
+    environment:
+      -   MONGO_INITDB_ROOT_USERNAME=admin
+      -   MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+      - db:/data/db
+      - configdb:/data/configdb
+      - mongot:/data/mongot
+  userDB:
+    image: postgres
+    shm_size: 128mb
+    environment:
+      - POSTGRES_PASSWORD=admin
+  adminer:
+    image: adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - userDB
+volumes:
+  db:
+  configdb:
+  mongot:
