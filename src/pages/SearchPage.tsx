@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./style/search.css";
 
 export default function SearchPage() {
     const [query, setQuery] = useState("");
@@ -115,7 +116,6 @@ export default function SearchPage() {
                 <div className="results-grid">
                     {results.map((movie) => (
                         <div className="movie-card" key={movie.id}>
-                            <p>{movie.title}</p>
                             {movie.poster_path && (
                                 <img
                                     className="movie-poster"
