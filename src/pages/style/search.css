@@ -1,3 +1,17 @@
+/* Theme: Neon Retro (This can change. Not married to the idea)*/
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+body {
+    background: radial-gradient(circle at top, #0a0a0f, #000000 80%);
+    font-family: "Orbitron", sans-serif;
+}
+
+input,
+select,
+h1,
+button {
+    font-family: inherit;
+}
+
 .search-page {
     max-width: 1100px;
     margin: 0 auto;
@@ -9,6 +23,12 @@
     text-align: center;
     margin-bottom: 2rem;
     letter-spacing: 2px;
+    color: #fff;
+    text-shadow: 
+    0 0 5px #ff00ff,
+    0 0 10px #ff00ff,
+    0 0 20px #ff00ff,
+    0 0 40px #ff00ff;
 }
 
 .search-controls {
@@ -19,24 +39,36 @@
     margin-bottom: 2rem;
 }
 
-.search-input {
-    flex: 1;
-    padding: 0.6rem 0.9rem;
-    font-size: 1rem;
-    border: 2px solid;
-}
-
+.search-input, 
 .search-select {
     padding: 0.6rem 0.9rem;
     font-size: 1rem;
-    border: 2px solid;
+    border: 2px solid #00ffff;
+    background: #0a0a0f;
+    color: #fff;
+    box-shadow: 
+    0 0 5px #00ffff,
+    inset 0 0 5px rgba(0,255,255,0.3);
 }
 
 .search-button {
-    padding: 0.6rem 0.9rem;
+    padding: 0.6rem 1.2rem;
     font-size: 1rem;
-    border: 2px solid;
+    border: 2px solid #ff00ff;
+    background: transparent;
+    color: #fff;
     cursor: pointer;
+    box-shadow: 
+    0 0 5px #ff00ff,
+    0 0 10px #ff00ff;
+    transition: all 0.2s ease;
+}
+
+.search-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+    0 0 10px #ff00ff,
+    0 0 20px #ff00ff;
 }
 
 .results-section {
@@ -45,7 +77,10 @@
 
 .no-results {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-top: 2rem;
+    color: #fff;
+    text-shadow: 
+    0 0 5px #ff00ff;
 }
 
 .results-grid {
@@ -59,12 +94,20 @@
     flex-direction: column;
     align-items: center;
     padding: 0.5rem;
+    border: 2px solid #00ffff;
+    background: #05050a;
     gap: 0.5rem;
     border-radius: 2px;
+    box-shadow: 
+    0 0 8px rgba(0,255,255,0.5);
+    transition: all 0.2s ease;
 }
 
 .movie-card:hover {
-    transform: translateY(-3px);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 
+    0 0 15px #00ffff,
+    0 0 25px #ff00ff;
 }
 
 .movie-poster {
@@ -78,4 +121,7 @@
     text-align: center;
     font-size: 0.9rem;
     line-height: 1.2;
+    color: #fff;
+    text-shadow: 
+    0 0 3px #00ffff;
 }
