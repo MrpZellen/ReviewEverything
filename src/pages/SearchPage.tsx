@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./style/search.css";
+import { Link } from "react-router-dom";
 
 export default function SearchPage() {
     const [query, setQuery] = useState("");
@@ -115,7 +116,7 @@ export default function SearchPage() {
                 )}
                 <div className="results-grid">
                     {results.map((movie) => (
-                        <div className="movie-card" key={movie.id}>
+                        <Link to={`/movie/${movie.id}`} className="movie-card" key={movie.id}>
                             {movie.poster_path && (
                                 <img
                                     className="movie-poster"
@@ -124,7 +125,7 @@ export default function SearchPage() {
                                 />
                             )}
                             <p className="movie-title">{movie.title}</p>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>
