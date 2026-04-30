@@ -20,6 +20,8 @@ services:
 # this service below is from official Mongo, but changed the image away from Atlas (web hosted)
       - "5173:5173"
       - "3100:3100"
+      - "5173:5173"
+      - "3100:3100"
   mongodb:
     image: mongodb/mongodb-community-server
     hostname: mongodb
