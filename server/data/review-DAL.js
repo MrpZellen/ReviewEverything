@@ -1,0 +1,134 @@
+const mongoose = require('mongoose');
+const userReviewSchema = require('../../models/UserReview');
+
+const uri = 'mongodb://admin:admin@localhost:27017/reviewdb?authSource=admin';
+
+const UserReview = mongoose.model('userReview', userReviewSchema);
+
+async function addReview(review) {
+    await mongoose.connect(uri);
+    const addedItem = new UserReview(review);
+    const result = await addedItem.save();
+    await mongoose.disconnect();
+    return result;
+}
+
+async function removeReview(id) {
+    await mongoose.connect(uri);
+    const removedItem = await UserReview.findByIdAndDelete(id).exec();
+    await mongoose.disconnect();
+    return removedItem;
+}
+
+async function updateReview(id, updatedReview) {
+    await mongoose.connect(uri);
+    // FIX: pass plain object, use { new: true } to get updated doc back, remove erroneous .save()
+    const result = await UserReview.findByIdAndUpdate(id, updatedReview, { new: true });
+    await mongoose.disconnect();
+    return result;
+}
+
+async function getAllReviewsByUser(userID) {
+    await mongoose.connect(uri);
+    const listOfReviews = await UserReview.find({ 'userID': userID }).exec();
+    await mongoose.disconnect();
+    return listOfReviews;
+}
+
+async function getAllReviewsByMovie(movieID) {
+    await mongoose.connect(uri);
+    const listOfReviews = await UserReview.find({ 'movieID': movieID }).exec();
+    await mongoose.disconnect();
+    return listOfReviews;
+}
+
+async function getAllMovieReviewsByRating(movieID, rating) {
+    await mongoose.connect(uri);
+    var listOfReviews;
+    if (isInt(rating)) {
+        listOfReviews = await UserReview.find({ 'rating': { $gte: rating, $lte: rating + 1 }, 'movieID': movieID }).exec();
+    } else {
+        listOfReviews = await UserReview.find({ 'rating': rating, 'movieID': movieID }).exec();
+    }
+    await mongoose.disconnect();
+    return listOfReviews;
+}
+
+async function getAllUserReviewsByRating(userID, rating) {
+    await mongoose.connect(uri);
+    var listOfReviews;
+    if (isInt(rating)) {
+        listOfReviews = await UserReview.find({ 'rating': { $gte: rating, $lte: rating + 1 }, 'userID': userID }).exec();
+    } else {
+        listOfReviews = await UserReview.find({ 'rating': rating, 'userID': userID }).exec();
+    }
+    await mongoose.disconnect();
+    return listOfReviews;
+}
+
+async function addReviewForUser(allData) {
+    await mongoose.connect(uri);
+    const newReview = new UserReview({
+        'userID': allData.userID,
+        'content': allData.reviewText,
+        'movieID': allData.movieID,
+        'rating': allData.rating,
+        'thumbsDown': 0,
+        'thumbsUp': 0,
+    });
+    const result = await newReview.save();
+    await mongoose.disconnect();
+    // FIX: .save() returns the document, not an insert result — use ._id
+    return result._id;
+}
+
+async function updateReviewForUser(allData) {
+    await mongoose.connect(uri);
+    const result = await UserReview.updateOne({ 'userID': allData.userID }, {
+        'content': allData.content,
+        'rating': allData.rating,
+        'username': allData.username,
+        'title': allData.title,
+    }).exec();
+    await mongoose.disconnect();
+    return result.acknowledged;
+}
+
+async function rateReview(reviewID, isPositive) {
+    // FIX: was missing uri, and was querying by userID instead of reviewID
+    await mongoose.connect(uri);
+    var result;
+    if (isPositive) {
+        result = await UserReview.updateOne({ '_id': reviewID }, { $inc: { thumbsUp: 1 } }).exec();
+    } else {
+        result = await UserReview.updateOne({ '_id': reviewID }, { $inc: { thumbsDown: 1 } }).exec();
+    }
+    await mongoose.disconnect();
+    return result.acknowledged;
+}
+
+async function deleteReview(reviewID) {
+    // FIX: was missing uri, and .acknowledged doesn't exist on findByIdAndDelete result
+    await mongoose.connect(uri);
+    const result = await UserReview.findByIdAndDelete(reviewID).exec();
+    await mongoose.disconnect();
+    return result !== null; // true if a document was actually deleted
+}
+
+function isInt(n) {
+    return n % 1 === 0;
+}
+
+module.exports = {
+    addReview,
+    removeReview,
+    updateReview,
+    getAllReviewsByUser,
+    getAllReviewsByMovie,
+    getAllMovieReviewsByRating,
+    getAllUserReviewsByRating,
+    addReviewForUser,
+    updateReviewForUser,
+    rateReview,
+    deleteReview
+};
