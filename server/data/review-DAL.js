@@ -22,7 +22,6 @@ async function removeReview(id) {
 
 async function updateReview(id, updatedReview) {
     await mongoose.connect(uri);
-    // FIX: pass plain object, use { new: true } to get updated doc back, remove erroneous .save()
     const result = await UserReview.findByIdAndUpdate(id, updatedReview, { new: true });
     await mongoose.disconnect();
     return result;
@@ -78,7 +77,6 @@ async function addReviewForUser(allData) {
     });
     const result = await newReview.save();
     await mongoose.disconnect();
-    // FIX: .save() returns the document, not an insert result — use ._id
     return result._id;
 }
 
@@ -95,7 +93,6 @@ async function updateReviewForUser(allData) {
 }
 
 async function rateReview(reviewID, isPositive) {
-    // FIX: was missing uri, and was querying by userID instead of reviewID
     await mongoose.connect(uri);
     var result;
     if (isPositive) {
@@ -108,11 +105,10 @@ async function rateReview(reviewID, isPositive) {
 }
 
 async function deleteReview(reviewID) {
-    // FIX: was missing uri, and .acknowledged doesn't exist on findByIdAndDelete result
     await mongoose.connect(uri);
     const result = await UserReview.findByIdAndDelete(reviewID).exec();
     await mongoose.disconnect();
-    return result !== null; // true if a document was actually deleted
+    return result !== null;
 }
 
 function isInt(n) {
