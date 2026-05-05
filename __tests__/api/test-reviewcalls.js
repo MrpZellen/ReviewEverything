@@ -1,15 +1,6 @@
 const app = require('../../server/index');
 
-let server;
 let createdReviewId;
-
-beforeAll(() => {
-    server = app.listen(3333);
-});
-
-afterAll(() => {
-    server.close();
-});
 
 describe("Review API scthuff", () => {
 
