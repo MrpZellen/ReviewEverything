@@ -92,3 +92,45 @@
     text-align: center;
     margin-top: 2rem;
 }
+
+.movie-genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.genre-pill {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border: 1px solid #00ffff;
+    font-size: 0.75rem;
+    box-shadow: 
+    0 0 5px rgba(0,255,255,0.5);
+}
+
+.cast-section {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,255,255,0.2);
+}
+
+.cast-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.cast-card {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.cast-card img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border: 2px solid #ff00ff;
+    box-shadow: 0 0 8px #ff00ff;
+}
