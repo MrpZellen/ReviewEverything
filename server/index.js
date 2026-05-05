@@ -60,4 +60,7 @@ app.delete('/user/reviews', async (req, res) => {
     res.json({'posted': result})
 })
 
+app.listen('3333')
+console.log('listening on 3333')
+
 module.exports = app;
