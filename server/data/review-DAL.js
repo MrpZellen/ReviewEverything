@@ -3,7 +3,7 @@ const userReviewSchema = require('../../models/UserReview');
 
 const uri = 'mongodb://admin:admin@localhost:27017/reviewdb?authSource=admin';
 
-const UserReview = mongoose.model('userReview', userReviewSchema);
+const UserReview = mongoose.model('UserReview', userReviewSchema);
 
 async function addReview(review) {
     await mongoose.connect(uri);
