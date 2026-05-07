@@ -34,7 +34,7 @@ export default function MovieDetails() {
         fetchReviews();
     }, [id]);
 
-    if (!movie) return <p>Loading...</p>;
+    if (!movie) return <p className="loading">Loading...</p>;
 
     return (
         <div className="movie-details">
@@ -63,13 +63,13 @@ export default function MovieDetails() {
                     <h2>Cast</h2>
                     <div className="cast-grid">
                         {movie.credits?.cast?.map((actor: any) => (
-                            <div key={actor.id} className="cast-card">
+                            <Link to={`/actor/${actor.id}`} key={actor.id} className="cast-card">
                                 {actor.profile_path && (
                                     <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name}/>
                                 )}
                                 <p>{actor.name}</p>
                                 <span className="charcter">{actor.character}</span>
-                            </div>
+                            </Link>
                         ))}
                     </div>
                 </div>
