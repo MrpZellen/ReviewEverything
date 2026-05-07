@@ -13,6 +13,5 @@ createRoot(document.getElementById('root')!).render(
     {/* <SearchPage/> */}
     <App/>
     {/* <Register /> */}
-    <Register />
   </StrictMode>,
 )
