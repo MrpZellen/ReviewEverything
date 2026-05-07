@@ -10,7 +10,8 @@ import Login from './login';
 function App() {
   return (
     <BrowserRouter>
-      <Navbar/>
+      <Navbar />
+
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/search" element={<SearchPage/>}/>
@@ -21,4 +22,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
