@@ -63,7 +63,7 @@ export default function MovieDetails() {
                     <h2>Cast</h2>
                     <div className="cast-grid">
                         {movie.credits?.cast?.map((actor: any) => (
-                            <Link to={`/actor/${actor.id}`} key={actor.id} className="cast-card">
+                            <Link to={`/actor/${actor.id}`} state={{from: `/movie/${movie.id}`}} key={actor.id} className="cast-card">
                                 {actor.profile_path && (
                                     <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name}/>
                                 )}
