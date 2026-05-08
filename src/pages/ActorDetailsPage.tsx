@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom"
+import "./style/actordetails.css";
 
 export default function ActorDetails() {
     const { id } = useParams();
@@ -21,29 +22,30 @@ export default function ActorDetails() {
     if (!actor) return <p className="loading">Loading...</p>;
     
     return (
-        <div>
-            <div>
-                <Link to={backLink} className="back-button">←</Link>
-                <div>
+        <div className="actor-page">
+            <div className="actor-backdrop" style={{backgroundImage: actor.profile_path ? `url(https://image.tmdb.org/t/p/original${actor.profile_path})` : "none"}}/>
+            <div className="actor-content page-container">
+                <Link to={backLink} className="neon-button">←</Link>
+                <div className="actor-main">
                     {actor.profile_path && (
-                        <img className="actor-image" src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`} alt={actor.name}/>
+                        <img className="actor-image neon-image" src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`} alt={actor.name}/>
                     )}
-                    <div>
-                        <h1>{actor.name}</h1>
+                    <div className="actor-info">
+                        <h1 className="actor-name">{actor.name}</h1>
                         {actor.birthday && (
-                            <p>Born: {actor.birthday}</p>
+                            <p className="actor-meta">Born: {actor.birthday}</p>
                         )}
                         {actor.place_of_birth && (
-                            <p>From: {actor.place_of_birth}</p>
+                            <p className="actor-meta">From: {actor.place_of_birth}</p>
                         )}
-                        <p>{actor.bio}</p>
+                        <p className="actor-bio">{actor.biography}</p>
                     </div>
                 </div>
-                <div>
-                    <h2>Known For</h2>
-                    <div>
+                <div className="known-for-section">
+                    <h2 className="known-for">Known For</h2>
+                    <div className="movie-grid">
                         {actor.movie_credits?.cast?.map((movie: any) => (
-                            <Link to={`/movie/${movie.id}`} key={movie.id}>
+                            <Link to={`/movie/${movie.id}`} key={movie.id} className="movie-card neon-card">
                                 {movie.poster_path && (
                                     <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title}/>
                                 )}

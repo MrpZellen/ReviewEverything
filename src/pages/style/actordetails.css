@@ -1,0 +1,98 @@
+.actor-page {
+    position: relative;
+    min-height: 100vh;
+    color: var(--text-light);
+}
+
+.actor-backdrop {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.25);
+}
+
+.neon-button {
+    align-self: flex-start;
+}
+
+.actor-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.actor-main {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.actor-info {
+    flex: 1;
+    max-width: 700px;
+}
+
+.actor-image {
+    width: 220px;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+}
+
+.actor-name {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.actor-meta {
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.actor-bio {
+    line-height: 1.6;
+}
+
+.known-for-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,255, 255,0.2);
+}
+
+.movie-card {
+    text-align: center;
+    font-size: 0.8rem;
+}
+
+.movie-card img {
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    object-fit: cover;
+    border: 2px solid var(--neon-blue);
+    box-shadow: 
+    0 0 8px var(--neon-blue);
+    transition: all 0.2s ease;
+}
+
+.movie-card:hover img {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 
+    0 0 12px var(--neon-blue),
+    0 0 20px var(--neon-pink);
+}
+
+@media (max-width: 768px) {
+    .actor-main {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .actor-info {
+        max-width: 100%;
+    }
+}
+
