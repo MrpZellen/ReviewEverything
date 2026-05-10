@@ -73,19 +73,26 @@ export default function MovieDetails() {
                         ))}
                     </div>
                 </div>
+                {(reviews.length !== 0) && (
                 <div className="review-section">
                     <h2>Reviews</h2>
                     <div className="review-grid">
                         {reviews.map((review: any) => (
                             <div key={review.movieID} className="review-card">
-                                <p>{review.title} - <strong>{review.rating}</strong></p>
-                                <p>Reviewed by: {review.username}</p>
+                                <p className="review-supertext">{review.title} - <strong>{review.rating}</strong></p>
+                                <p className="review-subtext">Reviewed by: {review.username}</p>
                                 <p>{review.content}</p>
-                                <p>ThumbsUp: {review.thumbsUp}, ThumbsDown: {review.thumbsDown}</p>
+                                <p className="review-subtext">ThumbsUp: {review.thumbsUp}, ThumbsDown: {review.thumbsDown}</p>
                             </div>
                         ))}
                     </div>
                 </div>
+                )}
+                {!(reviews.length !== 0) && (
+                <div className="review-errorcard">
+                    <p className="review-errortext"><strong>NO REVIEWS AVAILABLE FOR THIS MOVIE CURRENTLY</strong></p>
+                </div>
+                )}
             </div>
         </div>
     );
