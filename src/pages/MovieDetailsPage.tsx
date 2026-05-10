@@ -5,7 +5,7 @@ import "./style/moviedetails.css";
 export default function MovieDetails() {
     const { id } = useParams();
     const [movie, setMovie] = useState<any>(null);
-    const [reviews, setReviews] = useState<any>(null);
+    const [reviews, setReviews] = useState<any>([]);
     const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
     useEffect(() => {
@@ -20,13 +20,17 @@ export default function MovieDetails() {
     }, [id]);
 
     useEffect(() => {
-        const fetchReviews = async () => {
+    const fetchReviews = async () => {
+        try {
             const res = await fetch(
                 `http://localhost:3100/api/movies/reviews?movieID=${id}`
             );
             const data = await res.json();
-            setReviews(data);
-        };
+            setReviews(data.reviews);
+        } catch (err) {
+            console.error('Failed, its joever', err);
+        }
+    };
         fetchReviews();
     }, [id]);
 

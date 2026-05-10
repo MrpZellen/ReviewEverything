@@ -5,7 +5,7 @@ import userReviewSchema from '../../models/UserReview.js';
 const mongoHost = process.env.MONGO_HOST || 'localhost';
 const uri = `mongodb://admin:admin@${mongoHost}:27017/reviewdb?authSource=admin`;
 
-const UserReview = mongoose.model('UserReview', userReviewSchema);
+const UserReview = mongoose.model('UserReview', userReviewSchema, 'reviews');
 
 async function addReview(review) {
     await mongoose.connect(uri);
