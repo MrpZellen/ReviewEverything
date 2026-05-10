@@ -1,7 +1,9 @@
-const mongoose = require('mongoose');
-const userReviewSchema = require('../../models/UserReview');
+import mongoose from 'mongoose';
+import userReviewSchema from '../../models/UserReview.js';
 
-const uri = 'mongodb://admin:admin@localhost:27017/reviewdb?authSource=admin';
+// Use mongodb service name in Docker, localhost for tests
+const mongoHost = process.env.MONGO_HOST || 'localhost';
+const uri = `mongodb://admin:admin@${mongoHost}:27017/reviewdb?authSource=admin`;
 
 const UserReview = mongoose.model('UserReview', userReviewSchema);
 
@@ -37,6 +39,7 @@ async function getAllReviewsByUser(userID) {
 async function getAllReviewsByMovie(movieID) {
     await mongoose.connect(uri);
     const listOfReviews = await UserReview.find({ 'movieID': movieID }).exec();
+    console.log(listOfReviews)
     await mongoose.disconnect();
     return listOfReviews;
 }
@@ -115,7 +118,7 @@ function isInt(n) {
     return n % 1 === 0;
 }
 
-module.exports = {
+export {
     addReview,
     removeReview,
     updateReview,

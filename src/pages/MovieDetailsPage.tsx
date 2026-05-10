@@ -5,6 +5,7 @@ import "./style/moviedetails.css";
 export default function MovieDetails() {
     const { id } = useParams();
     const [movie, setMovie] = useState<any>(null);
+    const [reviews, setReviews] = useState<any>(null);
     const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
     useEffect(() => {
@@ -16,6 +17,17 @@ export default function MovieDetails() {
             setMovie(data);
         };
         fetchMovie();
+    }, [id]);
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            const res = await fetch(
+                `http://localhost:3100/api/movies/reviews?movieID=${id}`
+            );
+            const data = await res.json();
+            setReviews(data);
+        };
+        fetchReviews();
     }, [id]);
 
     if (!movie) return <p>Loading...</p>;
@@ -53,6 +65,19 @@ export default function MovieDetails() {
                                 )}
                                 <p>{actor.name}</p>
                                 <span className="charcter">{actor.character}</span>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                <div className="review-section">
+                    <h2>Reviews</h2>
+                    <div className="review-grid">
+                        {reviews.map((review: any) => (
+                            <div key={review.movieID} className="review-card">
+                                <p>{review.title} - <strong>{review.rating}</strong></p>
+                                <p>Reviewed by: {review.username}</p>
+                                <p>{review.content}</p>
+                                <p>ThumbsUp: {review.thumbsUp}, ThumbsDown: {review.thumbsDown}</p>
                             </div>
                         ))}
                     </div>
