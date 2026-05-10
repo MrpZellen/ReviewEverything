@@ -58,13 +58,13 @@ body {
     margin-bottom: 10px;
     font-size: 14px;
 }
-/* .login-group input {
+.login-group input {
     padding: 10px;
     margin-bottom: 20px;
     border: none;
     border-radius: 5px;
     font-family: inherit;
-} */
+}
 .login-button {
     padding: 0.6rem 1.2rem;
     font-size: 1rem;

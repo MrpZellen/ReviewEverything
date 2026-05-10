@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import './login.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -21,30 +22,20 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <div>
-                <div>
-                    <h1>
+        <div className="login-container">
+            <div className="login-form">
+                <div className="login-header">
+                    <h1 className="login-title">
                         Welcome Back
                     </h1>
                     <p>
                         Sign in to your account
                     </p>
                 </div>
-                {error && (
-                    <div style={{
-                        color: 'red',
-                        marginBottom: '15px',
-                        padding: '10px',
-                        border: '1px solid red',
-                        borderRadius: '4px'
-                    }}>
-                        {error}
-                    </div>
-                )}
-
+                {error && <div className="login-error" style={{ color: 'red' }}>{error}</div>}
+                
                 <form onSubmit={handleSubmit} noValidate>
-                    <div>
+                    <div className="login-group">
                         <label>
                             Email
                         </label>
@@ -56,8 +47,8 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <div>
-                        <label>
+                    <div className="login-group">
+                        <label >
                             Username
                         </label>
                         <input
@@ -69,7 +60,7 @@ const Login = () => {
                         />
                     </div>
 
-                    <div>
+                    <div className="login-group">
                             <label>
                             Password
                         </label>
@@ -81,7 +72,7 @@ const Login = () => {
                             required
                         />
                     </div>
-                    <button type="submit">
+                    <button type="submit" className="login-button">
                         Login
                     </button>
                 </form>

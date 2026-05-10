@@ -7,7 +7,7 @@ import SearchPage from './pages/SearchPage.tsx'
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Login />
-    <SearchPage/>
+    {/* <SearchPage/> */}
     {/* Temporary placement for testing */}
   </StrictMode>,
 )
