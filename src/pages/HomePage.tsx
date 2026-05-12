@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 // import "./style/home.css";
 
 // export default function HomePage(){

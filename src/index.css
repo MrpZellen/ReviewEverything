@@ -5,6 +5,12 @@
   --neon-blue: #00ffff;
   --bg-dark: #0a0a0f;
   --text-light: #ffffff;
+  --shadow-pink: 
+  0 0 5px #ff00ff,
+  0 0 10px #ff00ff;
+  --shadow-blue: 
+  0 0 5px #00ffff,
+  0 0 10px #00ffff;
 }
 
 * {
@@ -14,46 +20,34 @@
 }
 
 body {
-  background: radial-gradient(circle at top, #0a0a0f, #000000 80%);
+  background: radial-gradient(circle at top, #111122, #05050a 70%);
+  color: var(--text-light);
   font-family: "Orbitron", sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+/* Shared things */
+.page-container {
+  position: relative;
+  z-index: 1;
+  width: min(1200px, 90%);
+  margin: 0 auto;
+  padding: 2rem 0;
 }
 
-img { 
-  display: block;
-  max-width: 100%;
-}
-
-button, a, img {
-  transition: all 0.2s ease;
-}
-
-h1, h2, h3 {
+.page-title {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
   text-shadow: 
   0 0 5px var(--neon-pink),
   0 0 10px var(--neon-blue);
-  font-weight: 700;
-}
-
-p {
-  color: var(--text-light);
-}
-
-.page-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
 }
 
 .neon-button {
   margin-bottom: 1rem;
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -66,6 +60,7 @@ p {
   box-shadow: 
   0 0 5px var(--neon-pink),
   0 0 10px var(--neon-pink);
+  transition: all 0.2s ease;
 }
 
 .neon-button:hover {
@@ -75,30 +70,41 @@ p {
   0 0 20px var(--neon-pink);
 }
 
-.neon-image {
-  border: 2px solid var(--neon-pink);
-  box-shadow: 0 0 10px var(--neon-blue);
+.neon-input, 
+.neon-select {
+  background: rgba(0,0,0,0.5);
+  color: var(--text-light);
+  border: 2px solid var(--neon-blue);
+  padding: 0.7rem 1rem;
+  font-family: inherit;
+  box-shadow: inset
+  0 0 5px rgba(0,255,255,0.3),
+  0 0 5px rgba(0,255,255,0.4);
 }
 
 .neon-card {
+  background: rgba(0,0,0,0.4);
+  border: 2px solid var(--neon-blue);
+  box-shadow: 
+  0 0 8px rgba(0,255,255,0.5);
   transition: all 0.2s ease;
 }
 
 .neon-card:hover {
-  transform: translateY(-5px) scale(1.03);
+  transform: translateY(-5px) scale(1.02);
   box-shadow: 
-  0 0 12px var(--neon-blue),
-  0 0 20px var(--neon-pink);
+  0 0 15px var(--neon-blue),
+  0 0 25px var(--neon-pink);
 }
 
-.movie-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 1rem;
+.poster-image {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
 }
 
-.loading {
-  text-align: center;
-  margin-top: 2rem;
-  opacity: 0.8;
+.auto-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140, 1fr));
+  gap: 1rem;
 }

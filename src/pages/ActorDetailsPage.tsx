@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom"
-import "./style/actordetails.css";
+// import "./style/actordetails.css";
 
 export default function ActorDetails() {
     const { id } = useParams();
@@ -50,6 +50,7 @@ export default function ActorDetails() {
                                     <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title}/>
                                 )}
                                 <p>{movie.title}</p>
+                                <span className="movie-role">Character: {movie.character}</span>
                             </Link>
                         ))}
                     </div>

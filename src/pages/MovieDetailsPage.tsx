@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
-import "./style/moviedetails.css";
+// import "./style/moviedetails.css";
 
 export default function MovieDetails() {
     const { id } = useParams();
@@ -40,11 +40,11 @@ export default function MovieDetails() {
         <div className="movie-details">
             <div className="backdrop" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path})` }} />
             <div className="content">
-                <Link to="/search" className="back-button">←</Link>
+                <Link to="/search" className="neon-button">←</Link>
                 <div className="details-main">
-                    <img className="movie-detail-poster" src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} />
+                    <img className="poster-image neon-card" src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} />
                     <div className="details">
-                        <h1 className="movie-detail-title">{movie.title}</h1>
+                        <h1 className="page-title movie-detail-title">{movie.title}</h1>
                         {movie.tagline && (
                             <p className="movie-tagline">{movie.tagline}</p>
                         )}
@@ -61,14 +61,14 @@ export default function MovieDetails() {
                 </div>
                 <div className="cast-section">
                     <h2>Cast</h2>
-                    <div className="cast-grid">
+                    <div className="cast-grid auto-grid">
                         {movie.credits?.cast?.map((actor: any) => (
-                            <Link to={`/actor/${actor.id}`} state={{from: `/movie/${movie.id}`}} key={actor.id} className="cast-card">
+                            <Link to={`/actor/${actor.id}`} state={{from: `/movie/${movie.id}`}} key={actor.id} className="cast-card neon-card">
                                 {actor.profile_path && (
                                     <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name}/>
                                 )}
                                 <p>{actor.name}</p>
-                                <span className="charcter">{actor.character}</span>
+                                <span className="charcter">Character: {actor.character}</span>
                             </Link>
                         ))}
                     </div>

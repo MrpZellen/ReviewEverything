@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import "./style/search.css";
+// import "./style/search.css";
 import { Link } from "react-router-dom";
 
 export default function SearchPage() {
@@ -87,17 +87,17 @@ export default function SearchPage() {
 
     return (
         <div className="search-page">
-            <h1 className="search-title">Movie Search</h1>
+            <h1 className="page-title">Movie Search</h1>
             <div className="search-controls">
                 <input
-                    className="search-input"
+                    className="neon-input"
                     type="text"
                     placeholder="Search movies..."
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
                 <select
-                    className="search-select"
+                    className="neon-select"
                     value={selectedGenre}
                     onChange={(e) => setSelectedGenre(e.target.value)}
                 >
@@ -108,16 +108,16 @@ export default function SearchPage() {
                         </option>
                     ))}
                 </select>
-                <button className="search-button" onClick={handleSearch}>Search</button>
+                <button className="neon-button" onClick={handleSearch}>Search</button>
             </div>
 
             <div className="results-section">
                 {searched && results.length === 0 && (
                     <p className="no-results">No results found</p>
                 )}
-                <div className="results-grid">
+                <div className="auto-grid">
                     {results.map((movie) => (
-                        <Link to={`/movie/${movie.id}`} className="movie-card" key={movie.id}>
+                        <Link to={`/movie/${movie.id}`} className="movie-card neon-card" key={movie.id}>
                             {movie.poster_path && (
                                 <img
                                     className="movie-poster"
