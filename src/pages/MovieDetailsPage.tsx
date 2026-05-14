@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom"
-// import "./style/moviedetails.css";
+import "./style/moviedetails.css";
 
 export default function MovieDetails() {
     const { id } = useParams();
@@ -39,7 +39,7 @@ export default function MovieDetails() {
     return (
         <div className="movie-details">
             <div className="backdrop" style={{ backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path})` }} />
-            <div className="content">
+            <div className="page-container">
                 <Link to="/search" className="neon-button">←</Link>
                 <div className="details-main">
                     <img className="poster-image neon-card" src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`} alt={movie.title} />
@@ -63,12 +63,12 @@ export default function MovieDetails() {
                     <h2>Cast</h2>
                     <div className="cast-grid auto-grid">
                         {movie.credits?.cast?.map((actor: any) => (
-                            <Link to={`/actor/${actor.id}`} state={{from: `/movie/${movie.id}`}} key={actor.id} className="cast-card neon-card">
+                            <Link to={`/actor/${actor.id}`} state={{from: `/movie/${movie.id}`}} key={actor.id} className="cast-card neon-card neon-hover">
                                 {actor.profile_path && (
-                                    <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name}/>
+                                    <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name} className="poster-image"/>
                                 )}
                                 <p>{actor.name}</p>
-                                <span className="charcter">Character: {actor.character}</span>
+                                <span className="character">Character: {actor.character}</span>
                             </Link>
                         ))}
                     </div>

@@ -117,7 +117,7 @@ export default function SearchPage() {
                 )}
                 <div className="auto-grid">
                     {results.map((movie) => (
-                        <Link to={`/movie/${movie.id}`} className="movie-card neon-card" key={movie.id}>
+                        <Link to={`/movie/${movie.id}`} className="movie-card neon-card neon-hover" key={movie.id}>
                             {movie.poster_path && (
                                 <img
                                     className="movie-poster"
