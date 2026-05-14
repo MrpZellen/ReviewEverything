@@ -11,6 +11,11 @@
         res.json({ 'isServingJSON': true })
     })
 
+    app.get('/api/reviews', async (req, res) => {
+        const result = await getAllReviews()
+        res.json({'reviews': result})
+    })
+
     app.get('/api/user/reviews', async (req, res) => {
         const userID = await req.query.userID
         const result = await getAllReviewsByUser(userID)
