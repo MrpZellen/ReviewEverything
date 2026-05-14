@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-// import "./style/search.css";
+import "./style/search.css";
 import { Link } from "react-router-dom";
 
 const allGenreRows = [
