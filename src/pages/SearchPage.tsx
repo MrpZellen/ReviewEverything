@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-// import "./style/search.css";
+import "./style/search.css";
 import { Link } from "react-router-dom";
 
 export default function SearchPage() {
@@ -86,7 +86,7 @@ export default function SearchPage() {
     };
 
     return (
-        <div className="search-page">
+        <div className="page-container search-page">
             <h1 className="page-title">Movie Search</h1>
             <div className="search-controls">
                 <input
@@ -120,7 +120,7 @@ export default function SearchPage() {
                         <Link to={`/movie/${movie.id}`} className="movie-card neon-card neon-hover" key={movie.id}>
                             {movie.poster_path && (
                                 <img
-                                    className="movie-poster"
+                                    className="poster-image"
                                     src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                                     alt={movie.title}
                                 />
