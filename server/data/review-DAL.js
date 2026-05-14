@@ -36,6 +36,13 @@ async function getAllReviews() {
     return listOfReviews;
 }
 
+async function getTopFiftyReviews() {
+    await mongoose.connect(uri);
+    const listOfReviews = await UserReview.find().exec();
+    await mongoose.disconnect();
+    return listOfReviews.slice(0, 50);
+}
+
 async function getAllReviewsByUser(userID) {
     await mongoose.connect(uri);
     const listOfReviews = await UserReview.find({ 'userID': userID }).exec();
