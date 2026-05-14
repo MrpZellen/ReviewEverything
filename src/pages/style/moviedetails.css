@@ -142,6 +142,11 @@
   max-width: 65ch;
 }
 
+.movie-overview {
+    line-height: 1.5;
+    max-width: 65ch;
+}
+
 .cast-section {
   padding: 56px 0;
 }
@@ -157,6 +162,10 @@
 
 .cast-section h2 {
   margin-bottom: 1.5rem;
+}
+
+.cast-section h2 {
+    margin-bottom: 1.5rem;
 }
 
 .cast-grid {
