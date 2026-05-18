@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom"
-// import "./style/actordetails.css";
+import "./style/actordetails.css";
 
 export default function ActorDetails() {
     const { id } = useParams();

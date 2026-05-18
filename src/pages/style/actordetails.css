@@ -106,6 +106,14 @@
     align-items: start;
 }
 
+.known-for {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    text-shadow: 
+    0 0 5px var(--neon-pink),
+    0 0 10px var(--neon-blue);
+}
+
 .movie-card {
     background: #1d1d27;
     border-radius: 20px;
@@ -185,6 +193,14 @@
 
     .actor-bio{
         margin: 0 auto;
+    }
+
+    .actor-image {
+        width: 220px;
+    }
+
+    .known-for {
+        text-align: center;
     }
 }
 
