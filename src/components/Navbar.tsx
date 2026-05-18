@@ -56,6 +56,17 @@ export default function Navbar() {
         >
           Reviews
         </NavLink>
+
+        {/* Test Route for Write Reviews */}
+        <NavLink
+          to="/write-review/:movieID"
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
+          Write Review
+        </NavLink>
+        
       </div>
 
       <button className="signin-btn">Sign In</button>
