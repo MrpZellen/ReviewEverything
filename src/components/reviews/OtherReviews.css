@@ -1,0 +1,82 @@
+.other-reviews-section {
+  background: #ffffff;
+  color: #111;
+  padding: 42px 24px;
+}
+
+.other-reviews-section h2 {
+  font-size: 34px;
+  margin-bottom: 32px;
+}
+
+.other-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 38px;
+}
+
+.review-card {
+  background: #1f1f1f;
+  color: white;
+  border-radius: 5px;
+  min-height: 165px;
+  padding: 22px;
+}
+
+.review-stars {
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+
+.review-card h3 {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.review-card p {
+  color: #ddd;
+}
+
+.review-user {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.review-avatar {
+  width: 34px;
+  height: 34px;
+  background: #eee;
+  border-radius: 50%;
+}
+
+.review-user span {
+  display: block;
+  color: #888;
+}
+
+.review-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.review-actions button {
+  background: #333;
+  color: white;
+  border: 1px solid #555;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.empty-reviews {
+  color: #333;
+}
+
+@media (max-width: 1000px) {
+  .other-reviews-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
