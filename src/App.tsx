@@ -5,18 +5,21 @@ import SearchPage from './pages/SearchPage'
 import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
 import MovieDetails from './pages/MovieDetailsPage';
+import Login from './login';
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar/>
+      <Navbar />
+
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="/search" element={<SearchPage/>}/>
         <Route path='/movie/:id' element={<MovieDetails/>}/>
+        <Route path='/login' element={<Login/>}/>
       </Routes>
     </BrowserRouter>
   );
 }
 
-export default App
+export default App;

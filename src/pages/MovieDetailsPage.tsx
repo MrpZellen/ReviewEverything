@@ -5,6 +5,7 @@ import "./style/moviedetails.css";
 export default function MovieDetails() {
     const { id } = useParams();
     const [movie, setMovie] = useState<any>(null);
+    const [reviews, setReviews] = useState<any>([]);
     const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
     useEffect(() => {
@@ -16,6 +17,21 @@ export default function MovieDetails() {
             setMovie(data);
         };
         fetchMovie();
+    }, [id]);
+
+    useEffect(() => {
+    const fetchReviews = async () => {
+        try {
+            const res = await fetch(
+                `http://localhost:3100/api/movies/reviews?movieID=${id}`
+            );
+            const data = await res.json();
+            setReviews(data.reviews);
+        } catch (err) {
+            console.error('Failed, its joever', err);
+        }
+    };
+        fetchReviews();
     }, [id]);
 
     if (!movie) return <p>Loading...</p>;
@@ -57,6 +73,26 @@ export default function MovieDetails() {
                         ))}
                     </div>
                 </div>
+                {(reviews.length !== 0) && (
+                <div className="review-section">
+                    <h2>Reviews</h2>
+                    <div className="review-grid">
+                        {reviews.map((review: any) => (
+                            <div key={review.movieID} className="review-card">
+                                <p className="review-supertext">{review.title} - <strong>{review.rating}</strong></p>
+                                <p className="review-subtext">Reviewed by: {review.username}</p>
+                                <p>{review.content}</p>
+                                <p className="review-subtext">ThumbsUp: {review.thumbsUp}, ThumbsDown: {review.thumbsDown}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+                )}
+                {!(reviews.length !== 0) && (
+                <div className="review-errorcard">
+                    <p className="review-errortext"><strong>NO REVIEWS AVAILABLE FOR THIS MOVIE CURRENTLY</strong></p>
+                </div>
+                )}
             </div>
         </div>
     );

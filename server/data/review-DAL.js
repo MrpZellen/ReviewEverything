@@ -1,9 +1,11 @@
-const mongoose = require('mongoose');
-const userReviewSchema = require('../../models/UserReview');
+import mongoose from 'mongoose';
+import userReviewSchema from '../../models/UserReview.js';
 
-const uri = 'mongodb://admin:admin@localhost:27017/reviewdb?authSource=admin';
+// Use mongodb service name in Docker, localhost for tests
+const mongoHost = process.env.MONGO_HOST || 'localhost';
+const uri = `mongodb://admin:admin@${mongoHost}:27017/reviewdb?authSource=admin`;
 
-const UserReview = mongoose.model('userReview', userReviewSchema);
+const UserReview = mongoose.model('UserReview', userReviewSchema, 'reviews');
 
 async function addReview(review) {
     await mongoose.connect(uri);
@@ -22,7 +24,6 @@ async function removeReview(id) {
 
 async function updateReview(id, updatedReview) {
     await mongoose.connect(uri);
-    // FIX: pass plain object, use { new: true } to get updated doc back, remove erroneous .save()
     const result = await UserReview.findByIdAndUpdate(id, updatedReview, { new: true });
     await mongoose.disconnect();
     return result;
@@ -38,6 +39,7 @@ async function getAllReviewsByUser(userID) {
 async function getAllReviewsByMovie(movieID) {
     await mongoose.connect(uri);
     const listOfReviews = await UserReview.find({ 'movieID': movieID }).exec();
+    console.log(listOfReviews)
     await mongoose.disconnect();
     return listOfReviews;
 }
@@ -78,7 +80,6 @@ async function addReviewForUser(allData) {
     });
     const result = await newReview.save();
     await mongoose.disconnect();
-    // FIX: .save() returns the document, not an insert result — use ._id
     return result._id;
 }
 
@@ -95,7 +96,6 @@ async function updateReviewForUser(allData) {
 }
 
 async function rateReview(reviewID, isPositive) {
-    // FIX: was missing uri, and was querying by userID instead of reviewID
     await mongoose.connect(uri);
     var result;
     if (isPositive) {
@@ -108,18 +108,17 @@ async function rateReview(reviewID, isPositive) {
 }
 
 async function deleteReview(reviewID) {
-    // FIX: was missing uri, and .acknowledged doesn't exist on findByIdAndDelete result
     await mongoose.connect(uri);
     const result = await UserReview.findByIdAndDelete(reviewID).exec();
     await mongoose.disconnect();
-    return result !== null; // true if a document was actually deleted
+    return result !== null;
 }
 
 function isInt(n) {
     return n % 1 === 0;
 }
 
-module.exports = {
+export {
     addReview,
     removeReview,
     updateReview,
