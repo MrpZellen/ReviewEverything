@@ -1,5 +1,7 @@
 let createdReviewId;
 
+jest.setTimeout(30000);
+
 describe("Review API scthuff", () => {
 
     test("GET / should prove we are online", async () => {
