@@ -142,8 +142,8 @@ export default function SearchPage() {
         } catch (err) {
             console.error(err);
             setResults([]);
-        }
-    };
+        };
+    }
 
     return (
         <div className="search-page">
