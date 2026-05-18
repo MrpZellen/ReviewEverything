@@ -57,6 +57,7 @@ export default function Navbar() {
           Reviews
         </NavLink>
 
+        {/* Test Route for Write Reviews */}
         <NavLink
           to="/write-review/:movieID"
           className={({ isActive }) =>
