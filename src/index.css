@@ -8,7 +8,7 @@
 
   --glow-pink: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
   --glow-blue: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue);
-  --glow-pink: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-pink);
+  --glow-mix: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-pink);
 }
 
 * {
@@ -110,4 +110,11 @@ button {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 1rem;
+}
+
+.movie-role {
+    font-size: 0.75rem;
+    opacity: 0.85;
+    text-shadow: 
+    0 0 3px var(--neon-blue);
 }

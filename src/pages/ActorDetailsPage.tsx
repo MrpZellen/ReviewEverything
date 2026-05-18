@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom"
-// import "./style/actordetails.css";
+import "./style/actordetails.css";
 
 export default function ActorDetails() {
     const { id } = useParams();
@@ -28,7 +28,7 @@ export default function ActorDetails() {
                 <Link to={backLink} className="neon-button">←</Link>
                 <div className="actor-main">
                     {actor.profile_path && (
-                        <img className="actor-image neon-image" src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`} alt={actor.name}/>
+                        <img className="actor-image neon-card" src={`https://image.tmdb.org/t/p/w300${actor.profile_path}`} alt={actor.name}/>
                     )}
                     <div className="actor-info">
                         <h1 className="actor-name">{actor.name}</h1>
@@ -43,11 +43,11 @@ export default function ActorDetails() {
                 </div>
                 <div className="known-for-section">
                     <h2 className="known-for">Known For</h2>
-                    <div className="movie-grid">
+                    <div className="auto-grid">
                         {actor.movie_credits?.cast?.map((movie: any) => (
-                            <Link to={`/movie/${movie.id}`} key={movie.id} className="movie-card neon-card">
+                            <Link to={`/movie/${movie.id}`} key={movie.id} className="movie-card neon-card neon-hover">
                                 {movie.poster_path && (
-                                    <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title}/>
+                                    <img src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} alt={movie.title} className="poster-image"/>
                                 )}
                                 <p>{movie.title}</p>
                                 <span className="movie-role">Character: {movie.character}</span>

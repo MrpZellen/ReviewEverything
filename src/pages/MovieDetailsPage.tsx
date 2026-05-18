@@ -68,7 +68,7 @@ export default function MovieDetails() {
                                     <img src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`} alt={actor.name} className="poster-image"/>
                                 )}
                                 <p>{actor.name}</p>
-                                <span className="character">Character: {actor.character}</span>
+                                <span className="movie-role">Character: {actor.character}</span>
                             </Link>
                         ))}
                     </div>
