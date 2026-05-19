@@ -89,7 +89,7 @@ async function getAllUsers() {
         const users = await User.findAll();
         return users;
     } catch (err) {
-        console.error('getAllUsers failed:', err.message);
+        console.error('getAllUsers failed:', err);
         return null;
     }
 }

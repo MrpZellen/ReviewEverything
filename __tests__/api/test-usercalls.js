@@ -58,7 +58,7 @@ describe("User API", () => {
         expect(response.status).toBe(200);
         expect(data.user).toBeDefined();
         expect(data.user.username).toBe(newUser.username);
-        createdUserID = data.user.id;
+        createdUserID = data.user.userID;
     });
 
     test("GET /api/user", async () => {
