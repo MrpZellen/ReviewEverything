@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from "react";
+ import { useEffect, useState } from "react";
 import "./style/home.css";
 import {
   getMoviesByGenre,
