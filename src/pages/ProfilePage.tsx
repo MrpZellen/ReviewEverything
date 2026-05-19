@@ -35,6 +35,7 @@ export default function ProfilePage() {
             <div>
                 <button>Edit Profile</button>
                 <button>Delete Account</button>
+                <button>Log Out</button>
             </div>
         </div>
     )
