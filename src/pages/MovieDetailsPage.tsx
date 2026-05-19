@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./style/moviedetails.css";
 import WriteReviewForm from "../components/reviews/WriteReviews";
 import OtherReviews from "../components/reviews/OtherReviews";
+import { useNavigate } from "react-router-dom";
 
 export default function MovieDetails() {
     const { id } = useParams();
     const [movie, setMovie] = useState<any>(null);
     const [reviewRefreshKey, setReviewRefreshKey] = useState(0);
+    const navigate = useNavigate();
 
     const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
@@ -47,9 +49,12 @@ export default function MovieDetails() {
             }}
         >
             <div className="movie-hero-inner">
-            <Link to="/search" className="back-button">
+            <button
+                className="back-button"
+                onClick={() => navigate(-1)}
+                >
                 ← Back
-            </Link>
+            </button>
 
             <div className="details-main">
                 <img

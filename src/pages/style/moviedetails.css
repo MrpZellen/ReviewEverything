@@ -29,18 +29,19 @@
 }
 
 .back-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 32px;
-  padding: 11px 18px;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  align-self: flex-start;
+  border: 2px solid #ff00ff;
+  padding: 0.5rem 1rem;
   color: #fff;
-  text-decoration: none;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  transition: 0.2s ease;
+  background: transparent;
+  cursor: pointer;
+  box-shadow:
+    0 0 5px #ff00ff,
+    0 0 10px #ff00ff;
+  transition: all 0.2s ease;
+  font: inherit;
 }
 
 .back-button:hover {
