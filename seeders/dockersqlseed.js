@@ -25,7 +25,7 @@ const users = [
 export async function runSQL() {
   const client = new Client({
       host:     'userDB',
-      port:     5400,
+      port:     5432,
       database: 'postgres',
       user:     'postgres',
       password: 'admin',

@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(Get-ChildItem -Path \"C:\\\\Program Files\\\\Nc\\\\3Q3\\\\Full Stack Dev\\\\ReviewEverything\" -Recurse -Directory)",
-      "Bash(Select-Object -First 20)"
-    ]
-  }
-}

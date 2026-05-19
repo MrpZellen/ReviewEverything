@@ -97,7 +97,6 @@ app.post('/api/user', async (req, res) => {
 
 app.patch('/api/user', async (req, res) => {
     const { userID, ...updatedFields } = req.body;
-    const updatedFields = req.body;
     const result = await updateUser(userID, updatedFields)
     res.json({ 'user': result })
 })
