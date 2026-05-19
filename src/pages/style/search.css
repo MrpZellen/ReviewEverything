@@ -13,9 +13,11 @@ button {
 }
 
 .search-page {
-    max-width: 1100px;
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
     padding: 2rem;
+    overflow-x: hidden;
 }
 
 .search-title {
@@ -143,16 +145,10 @@ button {
     0 0 12px #00ffff;
 }
 
-.genre-movie-row {
-  display: flex;
-  gap: 1rem;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-}
-
 .genre-movie-card {
-  min-width: 150px;
-  max-width: 150px;
+  flex: 0 0 180px;
+  min-width: 180px;
+  max-width: 180px;
   text-decoration: none;
   color: white;
   background: #05050a;
@@ -190,17 +186,20 @@ button {
 
 .genre-scroll-wrapper {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   gap: 1rem;
   align-items: center;
+  width: 100%;
 }
 
 .genre-movie-row {
   display: flex;
   gap: 1rem;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-behavior: smooth;
-  padding-bottom: 1rem;
+  padding: 0.75rem 0 1.25rem;
+  min-width: 0;
 }
 
 .genre-movie-row::-webkit-scrollbar {
