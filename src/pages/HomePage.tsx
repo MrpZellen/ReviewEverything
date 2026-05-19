@@ -1,16 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-// import "./style/home.css";
-
-// export default function HomePage(){
-//     return(
-//         <div className="home-page">
-//             <div className="home">
-//                 <h1 className="home-title">Review Everything</h1>
-//                 <p className="home-tag">Discover movies and review them! </p>
-//             </div>
-//         </div>
-//     )
-// }
 import { useEffect, useState } from "react";
 import "./style/home.css";
 import {
@@ -19,6 +7,8 @@ import {
   IMAGE_BASE,
   type Movie,
 } from "../services/tmdb";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const genreList = [
   { id: 28, name: "Action" },
@@ -68,6 +58,7 @@ export default function HomePage() {
   const [trendingMovies, setTrendingMovies] = useState<Movie[]>([]);
   const [featuredMovie, setFeaturedMovie] = useState<Movie | undefined>();
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   
   useEffect(() => {
@@ -104,32 +95,35 @@ export default function HomePage() {
 
   return (
     <main className="landing-page">
-      <section className="hero-area">
-        <div
-          className="hero-image"
-          style={{
-            backgroundImage: featuredMovie?.backdrop_path
-              ? `linear-gradient(to right, rgba(7,10,18,0.96), rgba(7,10,18,0.42)), url(${getImage(
-                  featuredMovie.backdrop_path
-                )})`
-              : undefined,
-          }}
-        >
-          <div className="hero-overlay">
-            <p className="eyebrow">Featured Review</p>
-            <h1>{featuredMovie?.title || "Find your next favorite movie."}</h1>
-            <p>
-              {featuredMovie?.overview ||
-                "Search movies, rate what you watched, and see what everyone else is saying."}
-            </p>
-          </div>
+    <section className="hero-area">
+      <div
+        className="hero-image clickable-hero"
+        onClick={() => featuredMovie && navigate(`/movie/${featuredMovie.id}`)}
+        style={{
+          backgroundImage: featuredMovie?.backdrop_path
+            ? `linear-gradient(to right, rgba(7,10,18,0.96), rgba(7,10,18,0.42)), url(${getImage(
+                featuredMovie.backdrop_path
+              )})`
+            : undefined,
+        }}
+      >
+        <div className="hero-overlay">
+          <p className="eyebrow">Featured Review</p>
+          <h1>{featuredMovie?.title || "Find your next favorite movie."}</h1>
+          <p>
+            {featuredMovie?.overview ||
+              "Search movies, rate what you watched, and see what everyone else is saying."}
+          </p>
         </div>
+      </div>
 
-        <aside className="hero-side">
-          <ReviewCard movie={featuredMovie} />
-          <button className="start-reviewing">Start Reviewing</button>
-        </aside>
-      </section>
+      <aside className="hero-side">
+        <ReviewCard movie={featuredMovie} />
+        <button className="start-reviewing" onClick={() => featuredMovie && navigate(`/movie/${featuredMovie.id}`)}>
+          Start Reviewing
+        </button>
+      </aside>
+    </section>
 
       <section className="filter-area">
         <div className="filter-box">
@@ -174,23 +168,24 @@ export default function HomePage() {
                 <div className="movie-card skeleton" key={index}></div>
               ))
             : genreMovies.map((item) => (
-                <article
-                  className="movie-card"
-                  key={item.genre}
-                  style={{
-                    backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1)), url(${getImage(
-                      item.movie.backdrop_path || item.movie.poster_path
-                    )})`,
-                  }}
-                >
-                  <button className="heart">♡</button>
+              <Link
+                to={`/movie/${item.movie.id}`}
+                className="movie-card"
+                key={item.genre}
+                style={{
+                  backgroundImage: `linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.1)), url(${getImage(
+                    item.movie.backdrop_path || item.movie.poster_path
+                  )})`,
+                }}
+              >
+                <button className="heart" type="button">♡</button>
 
-                  <div className="movie-info">
-                    <span>{item.genre}</span>
-                    <small>{item.movie.title}</small>
-                  </div>
-                </article>
-              ))}
+                <div className="movie-info">
+                  <span>{item.genre}</span>
+                  <small>{item.movie.title}</small>
+                </div>
+              </Link>
+            ))}
 
           <button className="view-more">View More →</button>
         </div>

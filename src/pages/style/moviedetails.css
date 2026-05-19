@@ -263,3 +263,9 @@
     font-size: 2.7rem;
   }
 }
+
+.movie-card {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}

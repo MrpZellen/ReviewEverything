@@ -6,7 +6,6 @@ import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
 import MovieDetails from './pages/MovieDetailsPage';
 import Login from './login';
-import WriteReviews from './components/reviews/WriteReviews';
 
 function App() {
   return (
@@ -18,9 +17,6 @@ function App() {
         <Route path="/search" element={<SearchPage/>}/>
         <Route path='/movie/:id' element={<MovieDetails/>}/>
         <Route path='/login' element={<Login/>}/>
-
-        {/* Test Route for Write Reviews */}
-        <Route path='/write-review/:movieID' element={<WriteReviews movieID="1"/>}/>
       </Routes>
     </BrowserRouter>
   );
