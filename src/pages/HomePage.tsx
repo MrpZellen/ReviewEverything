@@ -187,7 +187,9 @@ export default function HomePage() {
               </Link>
             ))}
 
-          <button className="view-more">View More →</button>
+          <Link to="/search" className="view-more">
+            View More →
+          </Link>
         </div>
 
         <div className="section-heading reviews-heading">
