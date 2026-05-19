@@ -171,64 +171,64 @@ export default function SearchPage() {
             </button>
         </div>
 
-        {searched && (
+        {searched ? (
             <div className="results-section">
-            {results.length === 0 && <p className="no-results">No results found</p>}
+                {results.length === 0 && <p className="no-results">No results found</p>}
 
-            <div className="results-grid">
+                <div className="results-grid">
                 {results.map((movie) => (
-                <Link to={`/movie/${movie.id}`} className="movie-card" key={movie.id}>
+                    <Link to={`/movie/${movie.id}`} className="movie-card" key={movie.id}>
                     {movie.poster_path && (
-                    <img
+                        <img
                         className="movie-poster"
                         src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                         alt={movie.title}
-                    />
+                        />
                     )}
                     <p className="movie-title">{movie.title}</p>
-                </Link>
-                ))}
-            </div>
-            </div>
-        )}
-
-        <section className="genre-rows-section">
-        {genreRows.map((genre) => (
-            <div className="genre-row-block" key={genre.id}>
-            <h2>{genre.name} Movies</h2>
-
-            <div className="genre-scroll-wrapper">
-                <div className="genre-movie-row" id={`genre-row-${genre.id}`}>
-                {(moviesByGenre[genre.name] || []).map((movie) => (
-                    <Link to={`/movie/${movie.id}`} className="genre-movie-card" key={movie.id}>
-                    {movie.poster_path ? (
-                        <img
-                        src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
-                        alt={movie.title}
-                        />
-                    ) : (
-                        <div className="poster-placeholder">No Image</div>
-                    )}
-
-                    <p>{movie.title}</p>
                     </Link>
                 ))}
                 </div>
+            </div>
+            ) : (
+            <section className="genre-rows-section">
+                {genreRows.map((genre) => (
+                <div className="genre-row-block" key={genre.id}>
+                    <h2>{genre.name} Movies</h2>
 
-                <button
-                className="genre-scroll-button"
-                type="button"
-                onClick={() => {
-                    const row = document.getElementById(`genre-row-${genre.id}`);
-                    row?.scrollBy({ left: 600, behavior: "smooth" });
-                }}
-                >
-                →
-                </button>
-            </div>
-            </div>
-        ))}
-        </section>
+                    <div className="genre-scroll-wrapper">
+                    <div className="genre-movie-row" id={`genre-row-${genre.id}`}>
+                        {(moviesByGenre[genre.name] || []).map((movie) => (
+                        <Link to={`/movie/${movie.id}`} className="genre-movie-card" key={movie.id}>
+                            {movie.poster_path ? (
+                            <img
+                                src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+                                alt={movie.title}
+                            />
+                            ) : (
+                            <div className="poster-placeholder">No Image</div>
+                            )}
+
+                            <p>{movie.title}</p>
+                        </Link>
+                        ))}
+                    </div>
+
+                    <button
+                        className="genre-scroll-button"
+                        type="button"
+                        onClick={() => {
+                        const row = document.getElementById(`genre-row-${genre.id}`);
+                        row?.scrollBy({ left: 650, behavior: "smooth" });
+                        }}
+                    >
+                        →
+                    </button>
+                    </div>
+                </div>
+                ))}
+            </section>
+            )}
         </div>
     );
 }

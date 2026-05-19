@@ -13,11 +13,11 @@ button {
 }
 
 .search-page {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 2rem;
-    overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  padding: 2rem;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .search-title {
@@ -146,20 +146,22 @@ button {
 }
 
 .genre-movie-card {
-  flex: 0 0 180px;
-  min-width: 180px;
-  max-width: 180px;
+  flex: 0 0 210px;
+  min-width: 210px;
+  max-width: 210px;
+  min-height: 430px;
   text-decoration: none;
   color: white;
   background: #05050a;
   border: 2px solid #00ffff;
-  padding: 0.5rem;
+  padding: 0.75rem;
   box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
   transition: 0.2s ease;
+  box-sizing: border-box;
 }
 
 .genre-movie-card:hover {
-  transform: translateY(-5px) scale(1.03);
+  transform: translateY(-5px);
   box-shadow:
     0 0 15px #00ffff,
     0 0 25px #ff00ff;
@@ -168,37 +170,37 @@ button {
 .genre-movie-card img,
 .poster-placeholder {
   width: 100%;
-  aspect-ratio: 2 / 3;
+  height: 315px;
   object-fit: cover;
   background: #222;
   display: grid;
   place-items: center;
-  color: #aaa;
-  font-size: 0.75rem;
 }
 
 .genre-movie-card p {
-  margin: 0.6rem 0 0;
+  margin: 0.8rem 0 0;
+  min-height: 48px;
   text-align: center;
-  font-size: 0.8rem;
-  line-height: 1.2;
+  font-size: 0.95rem;
+  line-height: 1.25;
 }
 
 .genre-scroll-wrapper {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1fr) 64px;
+  gap: 1.5rem;
   align-items: center;
   width: 100%;
+  overflow: visible;
 }
 
 .genre-movie-row {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
   scroll-behavior: smooth;
-  padding: 0.75rem 0 1.25rem;
+  padding: 1rem 1rem 1.5rem 0.25rem;
   min-width: 0;
 }
 
