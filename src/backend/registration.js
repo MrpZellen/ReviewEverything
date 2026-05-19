@@ -8,6 +8,12 @@ const sequelize = new Sequelize('database', 'postgres', 'admin', {
   port: 5400,
 });
 
+app.post('/frontend/registration', registration.register);
+
+app.listen(5173, () => {
+    console.log('Server is running on port 5173');
+});
+
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
