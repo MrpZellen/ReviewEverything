@@ -134,3 +134,43 @@
     border: 2px solid #ff00ff;
     box-shadow: 0 0 8px #ff00ff;
 }
+
+.review-section {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,255,255,0.2);
+}
+
+.review-grid {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.review-card {
+    text-align: left;
+    font-size: 0.7rem;
+    min-width: 50%;
+}
+
+.review-errorcard {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,255,255,0.2);
+    text-align: left;
+    font-size: 0.7rem;
+    min-width: 50%;
+}
+
+.review-card .review-subtext {
+    font-size: small;
+}
+
+.review-card .review-supertext {
+    font-size: x-large;
+}
+
+.review-errorcard .review-errortext {
+    font-size: x-large;
+    color: red;
+}

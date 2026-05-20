@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 //mongoose schema definition, as to assist with data protection
@@ -14,4 +14,4 @@ const userReviewSchema = new Schema({
     thumbsDown: Number,
 });
 
-module.exports = userReviewSchema;
+export default userReviewSchema;
