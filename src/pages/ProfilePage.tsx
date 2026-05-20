@@ -1,4 +1,5 @@
 import { useState } from "react"
+import "./style/profilepage.css";
 
 export default function ProfilePage() {
     const [activeTab, setActiveTab] = useState("reviews");
@@ -50,7 +51,7 @@ export default function ProfilePage() {
                                 <span>8/10</span>
                                 <div className="actions">
                                     <button className="sml-btn">Edit</button>
-                                    <button className="sml-btn">Delete</button>
+                                    <button className="sml-btn danger">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -58,7 +59,7 @@ export default function ProfilePage() {
                 </div>
             )}
             {/* Add Ratings and Likes Here */}
-            <div>
+            <div className="actions-bar">
                 <button className="neon-button">Edit Profile</button>
                 <button className="neon-button danger">Delete Account</button>
                 <button className="neon-button">Logout</button>
