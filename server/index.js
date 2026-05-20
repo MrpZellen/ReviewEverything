@@ -1,5 +1,5 @@
 import { addReviewForUser, updateReviewForUser, deleteReview, getAllReviewsByMovie, getAllReviewsByUser, getAllMovieReviewsByRating,
-    getAllUserReviewsByRating, rateReview } from './data/review-DAL.js';
+    getAllUserReviewsByRating, getTopFiftyReviews } from './data/review-DAL.js';
 import { getAllUsers, getTopFiftyUsers, deleteUser, addUser, updateToAdmin, updateUser, getUser } from './data/user-DAL.js'
 import express from 'express';
 import cors from 'cors';

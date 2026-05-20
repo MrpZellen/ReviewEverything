@@ -17,14 +17,19 @@ export default function AdminPage() {
             const res = await fetch(
                 `http://localhost:3100/api/reviews/top`
             );
+            if (!res.ok){
+                throw new Error("" + res);
+            }
             const data = await res.json();
             setReviews(data.reviews);
         } catch (err) {
             console.error('Trump did it', err);
+        } finally {
+        setReviewLoaded(true);
         }
-    };
+    
         fetchReviews();
-        setReviewLoaded(true)
+    };
     }, []);
 
     useEffect(() => {
@@ -33,14 +38,18 @@ export default function AdminPage() {
             const res = await fetch(
                 `http://localhost:3100/api/users/top`
             );
+            if (!res.ok){
+                throw new Error("" + res);
+            }
             const data = await res.json();
-            setUsers(data.reviews);
+            setUsers(data.users);
         } catch (err) {
             console.error('Trump did it', err);
+        }finally {
+        setUserLoaded(true); 
         }
     };
         fetchUsers();
-        setUserLoaded(true)
     }, []);
 
     useEffect(() => {
@@ -65,7 +74,7 @@ export default function AdminPage() {
   return (
   <main>
     {(loading) && (
-        <h2>loading page...</h2>
+        <h2>    loading page...</h2>
     )}
     {(isAdmin && !loading) && 
     (<div>

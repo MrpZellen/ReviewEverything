@@ -143,5 +143,6 @@ export {
     addReviewForUser,
     updateReviewForUser,
     rateReview,
-    deleteReview
+    deleteReview,
+    getTopFiftyReviews
 };
