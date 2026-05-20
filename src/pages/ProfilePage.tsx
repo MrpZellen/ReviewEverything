@@ -1,5 +1,6 @@
 import { useState } from "react"
 import "./style/profilepage.css";
+import { Link } from "react-router-dom";
 
 export default function ProfilePage() {
     const [activeTab, setActiveTab] = useState("reviews");
@@ -59,6 +60,29 @@ export default function ProfilePage() {
                 </div>
             )}
             {/* Add Ratings and Likes Here */}
+            {activeTab === "ratings" && (
+                <div className="section">
+                    <h2 className="section-title">Your Ratings</h2>
+                    <div className="auto-grid">
+                        <div className="neon-card rating-card">
+                            <img className="poster" src="https://image.tmdb.org/t/p/w200/placeholder.jpg"/>
+                            <p>Movie Title</p>
+                            <p>5/10</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {activeTab === "likes" && (
+                <div className="section">
+                    <h2 className="section-title">Liked Movies</h2>
+                    <div className="auto-grid">
+                        <Link to="/movie/1" className="neon-card rating-card">
+                            <img className="poster" src="https://image.tmdb.org/t/p/w200/placeholder.jpg"/>
+                            <p>Movie Title</p>
+                        </Link>
+                    </div>
+                </div>
+            )}
             <div className="actions-bar">
                 <button className="neon-button">Edit Profile</button>
                 <button className="neon-button danger">Delete Account</button>
