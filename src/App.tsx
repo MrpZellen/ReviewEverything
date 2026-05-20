@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
 import MovieDetails from './pages/MovieDetailsPage';
 import Login from './login';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/search" element={<SearchPage/>}/>
         <Route path='/movie/:id' element={<MovieDetails/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path='/admin' element={<AdminPage/>}/>
       </Routes>
     </BrowserRouter>
   );

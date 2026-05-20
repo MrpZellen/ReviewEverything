@@ -56,6 +56,15 @@ export default function Navbar() {
         >
           Reviews
         </NavLink>
+
+        <NavLink
+          to="/admin"
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
+          Admin Dashboard
+        </NavLink>
       </div>
 
       <button className="signin-btn">Sign In</button>

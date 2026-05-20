@@ -4,6 +4,8 @@ import { Navigate } from "react-router-dom";
 
 export default function AdminPage() {
     const [loading, setLoading] = useState(true);
+    const [userLoaded, setUserLoaded] = useState(false);
+    const [reviewLoaded, setReviewLoaded] = useState(false);
     const [isAdmin, setIsAdmin] = useState(true); //TODO: correctly define admin status by reading from browser
     const [reviews, setReviews] = useState<any>([]);
     const [users, setUsers] = useState<any>([]);
@@ -22,6 +24,7 @@ export default function AdminPage() {
         }
     };
         fetchReviews();
+        setReviewLoaded(true)
     }, []);
 
     useEffect(() => {
@@ -37,10 +40,26 @@ export default function AdminPage() {
         }
     };
         fetchUsers();
+        setUserLoaded(true)
     }, []);
+
+    useEffect(() => {
+        if(userLoaded && reviewLoaded){
+            setLoading(false)
+        }
+    }, [userLoaded, reviewLoaded])
 
     function deleteReview(){
         console.log('review deleted')
+    }
+    function deleteUser(){
+        console.log('user deleted')
+    }
+    function addAdmin(){
+        console.log('admin added')
+    }
+    function removeAdmin(){
+        console.log('admin deleted')
     }
 
   return (
@@ -72,9 +91,18 @@ export default function AdminPage() {
                     <div key={user.userID} className="card">
                         <p className="supertext"><strong>{user.username}</strong></p>
                         <p className="subtext">{user.description}</p>
-                        <p>Is Admin: {user.isAdmin}</p>
-                        <p className="subtext">ThumbsUp: {review.thumbsUp}, ThumbsDown: {review.thumbsDown}</p>
-                        <button onClick={deleteReview}/>
+                        {(isAdmin) && 
+                        <div className="card">
+                            <p className="supertext">User is admin</p>
+                            <button onClick={removeAdmin} />
+                        </div>
+                        }
+                        {(!isAdmin) && 
+                        <div className="card">
+                            <button onClick={addAdmin} />
+                        </div>
+                        }
+                        <button onClick={deleteUser}/>
                     </div>
                 ))}
             </div>
