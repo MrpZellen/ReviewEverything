@@ -1,0 +1,48 @@
+h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 
+    0 0 5px #ff00ff,
+    0 0 10px #00ffff;
+}
+
+
+.section {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,255,255,0.2);
+}
+
+.grid {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.card {
+    text-align: left;
+    font-size: 0.7rem;
+    min-width: 50%;
+}
+
+.errorcard {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0,255,255,0.2);
+    text-align: left;
+    font-size: 0.7rem;
+    min-width: 50%;
+}
+
+.card .subtext {
+    font-size: small;
+}
+
+.card .supertext {
+    font-size: x-large;
+}
+
+.errorcard .errortext {
+    font-size: x-large;
+    color: red;
+}
