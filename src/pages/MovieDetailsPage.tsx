@@ -11,6 +11,8 @@ export default function MovieDetails() {
     const [movie, setMovie] = useState<any>(null);
     const [reviews, setReviews] = useState<any>([]);
     const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
+    const navigate = useNavigate();
+    const [reviewRefreshKey, setReviewRefreshKey] = useState(0);
 
     useEffect(() => {
         async function fetchMovie() {
@@ -44,7 +46,11 @@ export default function MovieDetails() {
         fetchReviews();
     }, [id]);
 
-    if (!movie) return <p>Loading...</p>;
+    if (!movie) {
+        return <p className="loading">Loading movie details...</p>;
+    }
+
+    const backdropImage = movie.backdrop_path || movie.poster_path;
 
     return (
         <main className="movie-details-page">
