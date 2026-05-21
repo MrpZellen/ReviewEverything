@@ -82,20 +82,27 @@ async function getAllUserReviewsByRating(userID, rating) {
     return listOfReviews;
 }
 
+
 async function addReviewForUser(allData) {
     await mongoose.connect(uri);
+
     const newReview = new UserReview({
-        'userID': allData.userID,
-        'content': allData.reviewText,
-        'movieID': allData.movieID,
-        'rating': allData.rating,
-        'thumbsDown': 0,
-        'thumbsUp': 0,
+        userID: allData.userID,
+        username: allData.username || "Reviewer Name",
+        title: allData.title,
+        content: allData.reviewText,
+        movieID: allData.movieID,
+        rating: allData.rating,
+        thumbsDown: 0,
+        thumbsUp: 0,
     });
+
     const result = await newReview.save();
     await mongoose.disconnect();
+
     return result._id;
 }
+
 
 async function updateReviewForUser(allData) {
     await mongoose.connect(uri);
