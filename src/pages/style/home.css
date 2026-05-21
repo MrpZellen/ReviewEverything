@@ -309,7 +309,7 @@
   font-weight: 900;
   color: white;
   line-height: 1;
-  text-shadow: 0 4px 14px rgba(0,0,0,0.45);
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
   max-width: 100%;
   overflow-wrap: normal;
   word-break: normal;
@@ -323,7 +323,7 @@
   font-size: 15px;
   line-height: 1.2;
   max-width: 100%;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.45);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.45);
   overflow-wrap: normal;
   word-break: normal;
 }
@@ -460,6 +460,7 @@
 }
 
 @media (max-width: 700px) {
+
   .hero-area,
   .filter-area,
   .content-area {
@@ -491,28 +492,30 @@
   .landing-footer p:nth-child(3) {
     text-align: center;
   }
-.home-actions {
+
+  .home-actions {
     display: flex;
     justify-content: center;
     gap: 1rem;
     flex-wrap: wrap;
-}
+  }
 
-.home-actions .neon-button {
+  .home-actions .neon-button {
     font-size: 1rem;
     padding: 0.8rem 1.6rem;
+  }
 }
 
-@media (max-width: 768px){
-    .home-content {
-        padding: 2rem 1rem;
-    }
+@media (max-width: 768px) {
+  .home-content {
+    padding: 2rem 1rem;
+  }
 
-    .home-title {
-        letter-spacing: 3px;
-    }
+  .home-title {
+    letter-spacing: 3px;
+  }
 
-    .home-tagline {
-        font-size: 1rem;
-    }
+  .home-tagline {
+    font-size: 1rem;
+  }
 }
