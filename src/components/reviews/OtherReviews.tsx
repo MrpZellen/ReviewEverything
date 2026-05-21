@@ -20,7 +20,7 @@ type OtherReviewsProps = {
     refreshKey?: number;
 };
 
-const API_BASE = "http://localhost:3333";
+const API_BASE = "http://localhost:3100/api";
 
 export default function OtherReviews({ movieID, refreshKey = 0 }: OtherReviewsProps) {
     const [reviews, setReviews] = useState<Review[]>([]);
