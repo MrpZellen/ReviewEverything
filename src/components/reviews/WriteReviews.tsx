@@ -56,6 +56,7 @@ export default function WriteReviews({ movieID, onReviewCreated }: WriteReviewsP
             setHoverRating(0);
             onReviewCreated?.();
         } catch (error) {
+            console.error("Review submit error:", error);
             setError("Could not submit review. Make sure server is running or try again later.");
         } finally {
             setSubmitting(false);

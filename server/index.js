@@ -69,9 +69,9 @@ app.patch('/api/user/reviews', async (req, res) => {
 })
 
 app.patch('/api/user/rate/:rate', async (req, res) => {
-    const userID = await req.body.userID;
+    const reviewID = req.body.reviewID;
     const isPositive = await req.params.rate === 'true';
-    const result = await rateReview(userID, isPositive)
+    const result = await rateReview(reviewID, isPositive);
     res.json({ 'wasRated': result })
 })
 
