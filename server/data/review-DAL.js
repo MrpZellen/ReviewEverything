@@ -29,12 +29,6 @@ async function updateReview(id, updatedReview) {
     return result;
 }
 
-async function getAllReviews() {
-    await mongoose.connect(uri);
-    const listOfReviews = await UserReview.find().exec();
-    await mongoose.disconnect();
-    return listOfReviews;
-}
 
 async function getTopFiftyReviews() {
     await mongoose.connect(uri);
@@ -141,6 +135,14 @@ async function getAllReviews() {
     await mongoose.disconnect();
     return reviews;
 }
+
+// async function getAllReviews() {
+//     await mongoose.connect(uri);
+//     const listOfReviews = await UserReview.find().exec();
+//     await mongoose.disconnect();
+//     return listOfReviews;
+// }
+
 
 
 function isInt(n) {
