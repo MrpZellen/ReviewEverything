@@ -23,7 +23,7 @@ export default function SearchPage() {
                 const data = await res.json();
                 setGenres(data.genres || []);
             } catch (err) {
-                console.error(err);
+                console.error(err); 
             }
         };
         fetchGenres();

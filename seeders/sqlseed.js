@@ -7,18 +7,24 @@ const users = [
     description:  'Self-appointed cinematic overlord. If it has lens flare, I have opinions.',
     movieReviews: [1226863],
     isAdmin:      true,
+    isDeleted: false,
+    deletedAt: null,
   },
   {
     username:     'busybobathan',
     description:  'Watches two movies a night, sleeps zero hours. Certified popcorn economist.',
     movieReviews: [1226863],
     isAdmin:      false,
+    isDeleted: false,
+    deletedAt: null,
   },
   {
     username:     'bubblebass',
     description:  'Here for the one-star reviews. Also they forgot the pickles.',
     movieReviews: [1226863],
     isAdmin:      false,
+    isDeleted: false,
+    deletedAt: null,
   },
 ];
 

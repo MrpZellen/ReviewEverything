@@ -49,6 +49,12 @@ app.post('/api/user/reviews', async (req, res) => {
     res.json({ 'givenID': result })
 })
 
+app.patch('/api/user/reviews/restore', async (req, res) => {
+    const reviewID = req.body.reviewID;
+    const result = await restoreReview(reviewID);
+    res.json({ 'posted': result });
+});
+
 app.patch('/api/user/reviews', async (req, res) => {
     const allData = req.body;
     const result = await updateReviewForUser(allData)

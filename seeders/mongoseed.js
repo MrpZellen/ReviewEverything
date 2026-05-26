@@ -13,6 +13,8 @@ const reviews = [
     rating: 8.5,
     thumbsUp: 142,
     thumbsDown: 18,
+    isDeleted: false,
+    deletedAt: null,
   },
   {
     userID: 1,
@@ -23,6 +25,8 @@ const reviews = [
     rating: 5.5,
     thumbsUp: 67,
     thumbsDown: 34,
+    isDeleted: false,
+    deletedAt: null,
   },
   {
     userID: 2,
@@ -33,6 +37,8 @@ const reviews = [
     rating: 2.0,
     thumbsUp: 23,
     thumbsDown: 89,
+    isDeleted: false,
+    deletedAt: null,
   },
 ];
 
