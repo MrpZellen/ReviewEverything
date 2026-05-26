@@ -6,8 +6,8 @@ import express from 'express';
 import cors from 'cors';
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.get('/api', (req, res) => {
     res.json({ 'isServingJSON': true })
@@ -45,11 +45,22 @@ app.get('/api/user/reviews/:rating', async (req, res) => {
     res.json({ 'reviews': result })
 })
 
-app.post('/api/user/reviews', async (req, res) => {
-    const allData = await req.body;
-    const result = await addReviewForUser(allData)
-    res.json({ 'givenID': result })
-})
+app.post("/api/user/reviews", async (req, res) => {
+    try {
+        const result = await addReviewForUser(req.body);
+        res.json({ givenID: result });
+    } catch (error) {
+        console.error("POST /api/user/reviews failed:", error);
+        res.status(500).json({ message: "Failed to save review." });
+    }
+});
+
+
+// app.post('/api/user/reviews', async (req, res) => {
+//     const allData = await req.body;
+//     const result = await addReviewForUser(allData)
+//     res.json({ 'givenID': result })
+// })
 
 app.patch('/api/user/reviews', async (req, res) => {
     const allData = await req.body;
