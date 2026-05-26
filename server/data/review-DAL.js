@@ -135,6 +135,14 @@ async function deleteReview(reviewID) {
     return result !== null;
 }
 
+async function getAllReviews() {
+    await mongoose.connect(uri);
+    const reviews = await UserReview.find({}).sort({ _id: -1 }).exec();
+    await mongoose.disconnect();
+    return reviews;
+}
+
+
 function isInt(n) {
     return n % 1 === 0;
 }
@@ -150,5 +158,6 @@ export {
     addReviewForUser,
     updateReviewForUser,
     rateReview,
-    deleteReview
+    deleteReview,
+    getAllReviews
 };
