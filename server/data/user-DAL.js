@@ -56,10 +56,29 @@ async function deleteUser(userID) {
             return null;
         }
 
-        await user.destroy();
+        user.isDeleted = true;
+        await user.save();
         return user;
     } catch (err) {
         console.error('deleteUser failed:', err.message);
+        return null;
+    }
+}
+
+async function restoreUser(userID) {
+    try {
+        const user = await User.findByPk(userID);
+
+        if (!user) {
+            console.error('restoreUser failed: user not found');
+            return null;
+        }
+
+        user.isDeleted = false;
+        await user.save();
+        return user;
+    } catch (err) {
+        console.error('restoreUser failed:', err.message);
         return null;
     }
 }
@@ -102,4 +121,5 @@ export {
     getTopFiftyUsers,
     getUser,
     getAllUsers,
+    restoreUser,
 };

@@ -119,6 +119,18 @@ app.delete('/api/user', async (req, res) => {
     res.json({ 'posted': result })
 })
 
+app.patch('api/user/restore', async (req, res) => {
+    const userID = req.body.userID;
+    const result = await restoreUser(userID)
+    res.json({ 'posted': result })
+})
+app.patch('api/user/reviews/restore', async (req, res) => {
+    const userID = req.body.reviewID;
+    const result = await restoreReview(reviewID)
+    res.json({ 'posted': result })
+})
+
+
 if (import.meta.url === `file://${process.argv[1]}`) {
     app.listen(3100, '0.0.0.0');
     console.log('listening on 3100');
