@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./style/moviedetails.css";
 import WriteReviewForm from "../components/reviews/WriteReviews";
 import OtherReviews from "../components/reviews/OtherReviews";
@@ -63,7 +63,7 @@ export default function MovieDetails() {
             ), url(https://image.tmdb.org/t/p/original${backdropImage})`,
             }}
         >
-            <div className="movie-hero-inner">
+            <div className="movie-hero-inner page-width">
             <button
                 className="back-button"
                 onClick={() => navigate(-1)}
@@ -130,7 +130,7 @@ export default function MovieDetails() {
             </div>
         </section>
 
-        <section className="cast-section">
+        <section className="cast-section page-width">
             <div className="section-header">
             <p className="eyebrow">Featured Cast</p>
             <h2>Cast</h2>
@@ -138,7 +138,7 @@ export default function MovieDetails() {
 
             <div className="cast-grid">
             {movie.credits?.cast?.slice(0, 12).map((actor: any) => (
-                <article key={actor.cast_id || actor.id} className="cast-card">
+                <Link to={`/actor/${actor.id}`} state={{from: `/movie/${id}`}} key={actor.cast_id || actor.id} className="cast-card">
                 {actor.profile_path ? (
                     <img
                     src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
@@ -150,12 +150,12 @@ export default function MovieDetails() {
 
                 <h3>{actor.name}</h3>
                 <p>{actor.character}</p>
-                </article>
+                </Link>
             ))}
             </div>
         </section>
 
-        <section className="review-compose-section">
+        <section className="review-compose-section page-width">
             <div className="review-preview-card">
             <img
                 src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}

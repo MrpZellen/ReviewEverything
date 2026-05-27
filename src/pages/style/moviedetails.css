@@ -1,13 +1,13 @@
 .movie-details-page {
   min-height: 100vh;
-  background: #121218;
-  color: #f8f8ff;
+  background: var(--bg-main);
+  color: var(--text-main);
   font-family: Inter, Arial, sans-serif;
 }
 
 .loading {
   min-height: 100vh;
-  background: #121218;
+  background: var(--bg-main);
   color: white;
   display: grid;
   place-items: center;
@@ -23,9 +23,15 @@
 }
 
 .movie-hero-inner {
+  padding: 48px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-width {
   width: min(1180px, 92%);
   margin: 0 auto;
-  padding: 48px 0;
 }
 
 .back-button {
@@ -54,11 +60,14 @@
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 48px;
+  width: fit-content;
+  margin: 0 auto;
   align-items: center;
 }
 
 .movie-detail-poster {
   width: 100%;
+  max-width: 280px;
   border-radius: 20px;
   object-fit: cover;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.65);
@@ -126,8 +135,6 @@
 }
 
 .cast-section {
-  width: min(1180px, 92%);
-  margin: 0 auto;
   padding: 56px 0;
 }
 
@@ -149,9 +156,12 @@
 .cast-card {
   background: #1d1d27;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .cast-card img,
@@ -163,6 +173,8 @@
   display: grid;
   place-items: center;
   color: #aaa;
+  border: 2px solid #ff00ff;
+  box-shadow: 0 0 8px rgba(255, 0, 255, 0.45);
 }
 
 .cast-card h3 {
@@ -176,9 +188,14 @@
   margin: 0 12px 14px;
 }
 
+.cast-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 0 15px #00ffff,
+    0 0 25px #ff00ff;
+}
+
 .review-compose-section {
-  width: min(1180px, 92%);
-  margin: 0 auto;
   padding: 56px 0;
   display: grid;
   grid-template-columns: 0.8fr 1fr;
@@ -222,7 +239,7 @@
 
 .write-review-form input,
 .write-review-form textarea {
-  background: #121218;
+  background: var(--bg-main);
 }
 
 /* other reviews support */
@@ -240,6 +257,7 @@
   border-radius: 18px;
   background: #171720;
   box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+  padding: 1rem;
 }
 
 @media (max-width: 850px) {
@@ -254,23 +272,23 @@
 
   .movie-detail-poster {
     max-width: 280px;
+    margin: 0 auto;
   }
 
   .details-main {
     gap: 28px;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
   }
 
   .movie-detail-title {
     font-size: 2.7rem;
   }
-}
 
-.cast-card img {
-    width: 100%;
-    aspect-ratio: 2 / 3;
-    object-fit: cover;
-    border: 2px solid #ff00ff;
-    box-shadow: 0 0 8px #ff00ff;
+  .movie-genres{
+    justify-content: center;
+  }
 }
 
 .review-section {
@@ -281,7 +299,7 @@
 
 .review-grid {
     display: grid;
-    grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1rem;
 }
 
