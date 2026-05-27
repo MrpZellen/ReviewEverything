@@ -18,7 +18,7 @@ export default function MovieDetails() {
         async function fetchMovie() {
         try {
             const res = await fetch(
-            `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=credits`
+            `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=credits,release_dates`
             );
 
             const data = await res.json();
@@ -51,6 +51,12 @@ export default function MovieDetails() {
     }
 
     const backdropImage = movie.backdrop_path || movie.poster_path;
+    const utisRelease = movie.release_dates?.results?.find(
+        (result: any) => result.iso_3166_1 ==="US"
+    );
+    const mpaRate = utisRelease?.release_dates?.find(
+        (release: any) => release.certification !== ""
+    )?.certification || "NR";
 
     return (
         <main className="movie-details-page">
@@ -88,6 +94,7 @@ export default function MovieDetails() {
                 )}
 
                 <p className="movie-release">
+                    <span className="rating-badge">{mpaRate}</span> •{" "}
                     {movie.release_date || "Unknown release date"} •{" "}
                     {movie.runtime ? `${movie.runtime} min` : "Runtime unavailable"} •{" "}
                     ⭐ {movie.vote_average?.toFixed(1) || "N/A"}/10
