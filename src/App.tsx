@@ -20,7 +20,10 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/reviews' element={<ReviewsPage/>}/>
       </Routes>
+
+      
     </BrowserRouter>
+    
   );
 }
 

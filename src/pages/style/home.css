@@ -1,10 +1,12 @@
 
 .landing-page {
-  min-height: 100vh;
+  /* min-height: 100vh; */
+  height: calc(100vh - 80px);
   background:
     radial-gradient(circle at top left, rgba(255, 61, 113, 0.22), transparent 34%),
     radial-gradient(circle at top right, rgba(124, 58, 237, 0.24), transparent 35%),
     #070a12;
+    /* height: 100vh; */
 }
 
 /* HERO */

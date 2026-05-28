@@ -15,9 +15,10 @@ button {
 .search-page {
   width: 100%;
   max-width: 100%;
-  padding: 2rem;
+  /* padding: 2rem; */
   overflow-x: hidden;
   box-sizing: border-box;
+  height: calc(100vh - 80px);
 }
 
 .search-title {
@@ -232,4 +233,34 @@ button {
   box-shadow:
     0 0 14px #ff00ff,
     0 0 24px #00ffff;
+}
+
+/* FOOTER */
+.landing-footer {
+  min-height: 78px;
+  padding: 0 36px;
+  background: #0f172a;
+  color: white;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  font-weight: 700;
+}
+
+.landing-footer p:nth-child(2) {
+  text-align: center;
+}
+
+.landing-footer p:nth-child(3) {
+  text-align: right;
+}
+
+@keyframes loading {
+  from {
+    background-position: 200% 0;
+  }
+
+  to {
+    background-position: -200% 0;
+  }
 }

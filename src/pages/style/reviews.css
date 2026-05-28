@@ -6,10 +6,11 @@ body {
 }
 
 .reviews-page {
-    min-height: 100vh;
-    max-width: 1400px;
+    /* min-height: 100vh; */
+    /* max-width: 1400px; */
     margin: 0 auto;
-    padding: 3rem 2rem;
+    /* padding: 3rem 2rem; */
+    height: calc(100vh - 80px);
 }
 
 .reviews-page h1 {
@@ -115,5 +116,35 @@ body {
 
     .reviews-page h1 {
         font-size: 1.8rem;
+    }
+}
+
+/* FOOTER */
+.landing-footer {
+    min-height: 78px;
+    padding: 0 36px;
+    background: #0f172a;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    font-weight: 700;
+}
+
+.landing-footer p:nth-child(2) {
+    text-align: center;
+}
+
+.landing-footer p:nth-child(3) {
+    text-align: right;
+}
+
+@keyframes loading {
+    from {
+        background-position: 200% 0;
+    }
+
+    to {
+        background-position: -200% 0;
     }
 }
