@@ -1,9 +1,11 @@
-const mongoose = require('mongoose');
-const userReviewSchema = require('../../models/UserReview');
+import mongoose from 'mongoose';
+import userReviewSchema from '../../models/UserReview.js';
 
-const uri = 'mongodb://admin:admin@localhost:27017/reviewdb?authSource=admin';
+// Use mongodb service name in Docker, localhost for tests
+const mongoHost = process.env.MONGO_HOST || 'localhost';
+const uri = `mongodb://admin:admin@${mongoHost}:27017/reviewdb?authSource=admin`;
 
-const UserReview = mongoose.model('UserReview', userReviewSchema);
+const UserReview = mongoose.model('UserReview', userReviewSchema, 'reviews');
 
 async function addReview(review) {
     await mongoose.connect(uri);
@@ -27,6 +29,14 @@ async function updateReview(id, updatedReview) {
     return result;
 }
 
+
+async function getTopFiftyReviews() {
+    await mongoose.connect(uri);
+    const listOfReviews = await UserReview.find().exec();
+    await mongoose.disconnect();
+    return listOfReviews.slice(0, 50);
+}
+
 async function getAllReviewsByUser(userID) {
     await mongoose.connect(uri);
     const listOfReviews = await UserReview.find({ 'userID': userID }).exec();
@@ -37,6 +47,7 @@ async function getAllReviewsByUser(userID) {
 async function getAllReviewsByMovie(movieID) {
     await mongoose.connect(uri);
     const listOfReviews = await UserReview.find({ 'movieID': movieID }).exec();
+    console.log(listOfReviews)
     await mongoose.disconnect();
     return listOfReviews;
 }
@@ -65,20 +76,27 @@ async function getAllUserReviewsByRating(userID, rating) {
     return listOfReviews;
 }
 
+
 async function addReviewForUser(allData) {
     await mongoose.connect(uri);
+
     const newReview = new UserReview({
-        'userID': allData.userID,
-        'content': allData.reviewText,
-        'movieID': allData.movieID,
-        'rating': allData.rating,
-        'thumbsDown': 0,
-        'thumbsUp': 0,
+        userID: allData.userID,
+        username: allData.username || "Reviewer Name",
+        title: allData.title,
+        content: allData.reviewText,
+        movieID: allData.movieID,
+        rating: allData.rating,
+        thumbsDown: 0,
+        thumbsUp: 0,
     });
+
     const result = await newReview.save();
     await mongoose.disconnect();
+
     return result._id;
 }
+
 
 async function updateReviewForUser(allData) {
     await mongoose.connect(uri);
@@ -111,11 +129,27 @@ async function deleteReview(reviewID) {
     return result !== null;
 }
 
+async function getAllReviews() {
+    await mongoose.connect(uri);
+    const reviews = await UserReview.find({}).sort({ _id: -1 }).exec();
+    await mongoose.disconnect();
+    return reviews;
+}
+
+// async function getAllReviews() {
+//     await mongoose.connect(uri);
+//     const listOfReviews = await UserReview.find().exec();
+//     await mongoose.disconnect();
+//     return listOfReviews;
+// }
+
+
+
 function isInt(n) {
     return n % 1 === 0;
 }
 
-module.exports = {
+export {
     addReview,
     removeReview,
     updateReview,
@@ -126,5 +160,6 @@ module.exports = {
     addReviewForUser,
     updateReviewForUser,
     rateReview,
-    deleteReview
+    deleteReview,
+    getAllReviews
 };

@@ -1,10 +1,9 @@
 import { Sequelize, DataTypes, Model } from 'sequelize';
 
-//sequelize definition for connection and datatype definition like mongoose.
-const sequelize = new Sequelize('database', 'postgres', 'admin', {
-  host: 'localhost',
+const sequelize = new Sequelize('postgres', 'postgres', 'admin', {
+  host: 'userDB',
   dialect: 'postgres',
-  port: 5400,
+  port: 5432,
 });
 
 class User extends Model {}
@@ -19,16 +18,23 @@ User.init(
       type: DataTypes.STRING,
     },
     movieReviews: {
-        type: DataTypes.ARRAY,
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
     },
     isAdmin: {
-        type: DataTypes.BOOLEAN,
-    }
+      type: DataTypes.BOOLEAN,
+    },
+    userID: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
   },
   {
     sequelize,
     modelName: 'User',
+    tableName: 'users',
+    timestamps: false,
   },
 );
 
-export default User
+export default User;

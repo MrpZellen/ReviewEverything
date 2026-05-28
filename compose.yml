@@ -8,8 +8,9 @@ services:
     container_name: webpage
     ports:
     - "5173:5173"
-    - "3100:3100" #TODO: establish express port as 3100, or update here.
+    - "3100:3100"
     environment:
+      - MONGO_HOST=mongodb
       - MONGOPASS=admin
       - MONGOUSER=userDB
       - POSTGRESPASS=admin

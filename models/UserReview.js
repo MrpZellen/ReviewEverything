@@ -14,4 +14,4 @@ const userReviewSchema = new Schema({
     thumbsDown: Number,
 });
 
-module.exports = userReviewSchema;
+export default userReviewSchema;
