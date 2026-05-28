@@ -209,12 +209,13 @@
 html,
 body,
 #root {
-  margin: 0;
   width: 100%;
-  min-height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 body {
+  margin: 0;;
   background: var(--bg-main);
   color: var(--text-main);
   font-family: "Inter", sans-serif;
