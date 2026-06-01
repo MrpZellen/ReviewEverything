@@ -187,8 +187,17 @@
 }
 
 @media (max-width: 480px){
+    .actor-page,
+    .actor-hero {
+        height: auto !important;
+    }
+
+    .actor-hero {
+        align-items: flex-start !important;
+    }
+
     .actor-hero-inner {
-        padding: 24px 0;
+        padding: 20px 0 40px 0;
     }
 
     .back-button {
