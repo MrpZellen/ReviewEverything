@@ -64,7 +64,6 @@ export default function ActorDetails() {
                             (a: any, b:any) => 
                                 b.vote_count - a.vote_count
                         )
-                        .slice(0, 12) 
                         .map((movie: any) => (
                             <Link to={`/movie/${movie.id}`} key={movie.id} className="movie-card">
                                 {movie.poster_path ? (

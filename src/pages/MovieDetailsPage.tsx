@@ -52,7 +52,7 @@ export default function MovieDetails() {
 
     const backdropImage = movie.backdrop_path || movie.poster_path;
     const utisRelease = movie.release_dates?.results?.find(
-        (result: any) => result.iso_3166_1 ==="US"
+        (result: any) => result.iso_3166_1 === "US"
     );
     const mpaRate = utisRelease?.release_dates?.find(
         (release: any) => release.certification !== ""
@@ -67,15 +67,15 @@ export default function MovieDetails() {
                 rgba(12, 12, 18, 0.78),
                 rgba(12, 12, 18, 0.95)
             ), url(https://image.tmdb.org/t/p/original${backdropImage})`,
-            }}
-        >
-            <div className="movie-hero-inner page-width">
-            <button
-                className="back-button"
-                onClick={() => navigate(-1)}
-                >
-                ← Back
-            </button>
+                }}
+            >
+                <div className="movie-hero-inner page-width">
+                    <button
+                        className="back-button"
+                        onClick={() => navigate(-1)}
+                    >
+                        ← Back
+                    </button>
 
                     <div className="details-main">
                         <img
@@ -93,12 +93,12 @@ export default function MovieDetails() {
                                 <p className="movie-tagline">“{movie.tagline}”</p>
                             )}
 
-                <p className="movie-release">
-                    <span className="rating-badge">{mpaRate}</span> •{" "}
-                    {movie.release_date || "Unknown release date"} •{" "}
-                    {movie.runtime ? `${movie.runtime} min` : "Runtime unavailable"} •{" "}
-                    ⭐ {movie.vote_average?.toFixed(1) || "N/A"}/10
-                </p>
+                            <p className="movie-release">
+                                <span className="rating-badge">{mpaRate}</span> •{" "}
+                                {movie.release_date || "Unknown release date"} •{" "}
+                                {movie.runtime ? `${movie.runtime} min` : "Runtime unavailable"} •{" "}
+                                ⭐ {movie.vote_average?.toFixed(1) || "N/A"}/10
+                            </p>
 
                             <div className="movie-genres">
                                 {movie.genres?.map((genre: any) => (
@@ -145,7 +145,7 @@ export default function MovieDetails() {
 
                 <div className="cast-grid">
                     {movie.credits?.cast?.slice(0, 12).map((actor: any) => (
-                        <article key={actor.cast_id || actor.id} className="cast-card">
+                        <Link to={`/actor/${actor.id}`} state={{ from: `/movie/${id}` }} key={actor.cast_id || actor.id} className="cast-card">
                             {actor.profile_path ? (
                                 <img
                                     src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
@@ -157,7 +157,7 @@ export default function MovieDetails() {
 
                             <h3>{actor.name}</h3>
                             <p>{actor.character}</p>
-                        </article>
+                        </Link>
                     ))}
                 </div>
             </section>
