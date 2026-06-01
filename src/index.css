@@ -21,7 +21,7 @@ body {
   background: radial-gradient(circle at top, #111122, #05050a 70%);
   color: var(--text-light);
   font-family: "Orbitron", sans-serif;
-  min-height: 100vh;
+  height: calc(100vh - 80px);
   overflow-x: hidden;
 }
 

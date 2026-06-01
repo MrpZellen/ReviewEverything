@@ -1,5 +1,5 @@
 .movie-details-page {
-  min-height: 100vh;
+  height: calc(100vh - 80px);
   background: var(--bg-main);
   color: var(--text-main);
   font-family: Inter, Arial, sans-serif;
@@ -15,7 +15,7 @@
 }
 
 .movie-hero {
-  height: 100vh;
+  height: calc(100vh - 80px);
   min-height: 620px;
   background-size: cover;
   background-position: center;
