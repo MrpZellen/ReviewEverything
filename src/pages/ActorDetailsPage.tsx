@@ -79,6 +79,12 @@ export default function ActorDetails() {
                         ))}
                 </div>
             </section>
+
+            <footer className="landing-footer">
+                <p>Review Everything</p>
+                <p>Group Name © 2026</p>
+                <p>Links</p>
+            </footer>
         </main>
     )
 }
