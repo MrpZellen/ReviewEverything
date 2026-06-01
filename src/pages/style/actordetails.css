@@ -1,6 +1,7 @@
 .actor-page {
     position: relative;
     min-height: 100vh;
+    background: var(--bg-main);
     color: var(--text-light);
 }
 
@@ -9,7 +10,17 @@
     inset: 0;
     background-size: cover;
     background-position: center;
-    filter: brightness(0.25);
+}
+
+.actor-backdrop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: 
+        linear-gradient(
+            rgba(12, 12, 18, 0.78),
+            rgba(12, 12, 18, 0.95)
+        );
 }
 
 .actor-content {
@@ -17,11 +28,29 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    width: min(1180px, 92%);
+    margin: 0 auto;
+    padding: 48px 0;
 }
 
 .actor-content .neon-button{
-    align-self: flex-start;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    border: 2px solid #ff00ff;
+    padding: 0.5rem 1rem;
+    color: white;
+    text-decoration: none;
+    background: transparent;
+    box-shadow: 
+        0 0 5px #ff00ff,
+        0 0 10px #ff00ff;
+    transition: all 0.2s ease;
+}
+
+.actor-content .neon-button:hover {
+    transform: translateY(-2px);
+    border-color: #ff4fd8;
+    box-shadow: 0 0 18px rgba(255, 79, 216, 0.45);
 }
 
 .actor-main {
