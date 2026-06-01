@@ -6,6 +6,8 @@ import HomePage from './pages/HomePage';
 import Navbar from './components/Navbar';
 import MovieDetails from './pages/MovieDetailsPage';
 import ActorDetails from './pages/ActorDetailsPage';
+import Login from './login';
+import ReviewsPage from './pages/ReviewsPage';
 
 function App() {
   return (
@@ -17,8 +19,13 @@ function App() {
         <Route path="/search" element={<SearchPage/>}/>
         <Route path='/movie/:id' element={<MovieDetails/>}/>
         <Route path='/actor/:id' element={<ActorDetails/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/reviews' element={<ReviewsPage/>}/>
       </Routes>
+
+      
     </BrowserRouter>
+    
   );
 }
 

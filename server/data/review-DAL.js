@@ -29,12 +29,6 @@ async function updateReview(id, updatedReview) {
     return result;
 }
 
-async function getAllReviews() {
-    await mongoose.connect(uri);
-    const listOfReviews = await UserReview.find().exec();
-    await mongoose.disconnect();
-    return listOfReviews;
-}
 
 async function getTopFiftyReviews() {
     await mongoose.connect(uri);
@@ -82,20 +76,27 @@ async function getAllUserReviewsByRating(userID, rating) {
     return listOfReviews;
 }
 
+
 async function addReviewForUser(allData) {
     await mongoose.connect(uri);
+
     const newReview = new UserReview({
-        'userID': allData.userID,
-        'content': allData.reviewText,
-        'movieID': allData.movieID,
-        'rating': allData.rating,
-        'thumbsDown': 0,
-        'thumbsUp': 0,
+        userID: allData.userID,
+        username: allData.username || "Reviewer Name",
+        title: allData.title,
+        content: allData.reviewText,
+        movieID: allData.movieID,
+        rating: allData.rating,
+        thumbsDown: 0,
+        thumbsUp: 0,
     });
+
     const result = await newReview.save();
     await mongoose.disconnect();
+
     return result._id;
 }
+
 
 async function updateReviewForUser(allData) {
     await mongoose.connect(uri);
@@ -128,6 +129,22 @@ async function deleteReview(reviewID) {
     return result !== null;
 }
 
+async function getAllReviews() {
+    await mongoose.connect(uri);
+    const reviews = await UserReview.find({}).sort({ _id: -1 }).exec();
+    await mongoose.disconnect();
+    return reviews;
+}
+
+// async function getAllReviews() {
+//     await mongoose.connect(uri);
+//     const listOfReviews = await UserReview.find().exec();
+//     await mongoose.disconnect();
+//     return listOfReviews;
+// }
+
+
+
 function isInt(n) {
     return n % 1 === 0;
 }
@@ -143,5 +160,6 @@ export {
     addReviewForUser,
     updateReviewForUser,
     rateReview,
-    deleteReview
+    deleteReview,
+    getAllReviews
 };
