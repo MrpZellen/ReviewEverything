@@ -1,14 +1,13 @@
 .movie-details-page {
-  height: calc(100vh - 80px);
-  /* min-height: 100vh; */
-  background: #121218;
-  color: #f8f8ff;
+  min-height: 100vh;
+  background: var(--bg-main);
+  color: var(--text-main);
   font-family: Inter, Arial, sans-serif;
 }
 
 .loading {
-  height: calc(100vh - 80px);
-  background: #121218;
+  min-height: 100vh;
+  background: var(--bg-main);
   color: white;
   display: grid;
   place-items: center;
@@ -25,9 +24,15 @@
 }
 
 .movie-hero-inner {
+  padding: 48px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-width {
   width: min(1180px, 92%);
   margin: 0 auto;
-  padding: 48px 0;
 }
 
 .back-button {
@@ -56,11 +61,14 @@
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: 48px;
+  width: fit-content;
+  margin: 0 auto;
   align-items: center;
 }
 
 .movie-detail-poster {
   width: 100%;
+  max-width: 280px;
   border-radius: 20px;
   object-fit: cover;
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.65);
@@ -133,8 +141,6 @@
 }
 
 .cast-section {
-  width: min(1180px, 92%);
-  margin: 0 auto;
   padding: 56px 0;
 }
 
@@ -163,10 +169,20 @@
   padding: 0.75rem;
   text-align: center;
   background: #1d1d27;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 18px;
+  border: px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rating-badge {
+  color: #ffb7ef;
+  border: 1px solid #d8d8d8;
+  border-radius: 4px;
+  padding: 2px 6px5;
 }
 
 .cast-card img,
@@ -178,6 +194,10 @@
   display: grid;
   place-items: center;
   color: #aaa;
+  border: 2px solid #ff00ff;
+  box-shadow: 0 0 8px rgba(255, 0, 255, 0.45);
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
 }
 
 .cast-card h3 {
@@ -191,9 +211,14 @@
   margin: 0 12px 14px;
 }
 
+.cast-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 15px #00ffff,
+    0 0 25px #ff00ff;
+}
+
 .review-compose-section {
-  width: min(1180px, 92%);
-  margin: 0 auto;
   padding: 56px 0;
   display: grid;
   grid-template-columns: 0.8fr 1fr;
@@ -237,7 +262,7 @@
 
 .write-review-form input,
 .write-review-form textarea {
-  background: #121218;
+  background: var(--bg-main);
 }
 
 /* other reviews support */
@@ -255,6 +280,7 @@
   border-radius: 18px;
   background: #171720;
   box-shadow: 0 16px 35px rgba(0, 0, 0, 0.18);
+  padding: 1rem;
 }
 
 @media (max-width: 850px) {
@@ -269,125 +295,129 @@
 
   .movie-detail-poster {
     max-width: 280px;
+    margin: 0 auto;
   }
 
   .details-main {
     gap: 28px;
+    justify-content: center;
+    justify-items: center;
+    text-align: center;
   }
 
   .movie-detail-title {
     font-size: 2.7rem;
   }
-}
 
-.cast-card .poster-image {
-  width: 100%;
-  border: 2px solid #ff00ff;
-  box-shadow: 0 0 8px #ff00ff;
-}
+  .cast-card .poster-image {
+    width: 100%;
+    border: 2px solid #ff00ff;
+    box-shadow: 0 0 8px #ff00ff;
+  }
 
-.review-section {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(0, 255, 255, 0.2);
-}
+  .review-section {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+  }
 
-.review-grid {
-  display: grid;
-  grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 1rem;
-}
+  .review-grid {
+    display: grid;
+    grid-template-rows: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 1rem;
+  }
 
-.review-card {
-  text-align: left;
-  font-size: 0.7rem;
-  min-width: 50%;
-}
+  .review-card {
+    text-align: left;
+    font-size: 0.7rem;
+    min-width: 50%;
+  }
 
-.review-errorcard {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid rgba(0, 255, 255, 0.2);
-  text-align: left;
-  font-size: 0.7rem;
-  min-width: 50%;
-}
+  .review-errorcard {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+    text-align: left;
+    font-size: 0.7rem;
+    min-width: 50%;
+  }
 
-.review-card .review-subtext {
-  font-size: small;
-}
+  .review-card .review-subtext {
+    font-size: small;
+  }
 
-.review-card .review-supertext {
-  font-size: x-large;
-}
+  .review-card .review-supertext {
+    font-size: x-large;
+  }
 
-.review-errorcard .review-errortext {
-  font-size: x-large;
-  color: red;
-  margin-bottom: 0.75rem;
-}
+  .review-errorcard .review-errortext {
+    font-size: x-large;
+    color: red;
+    margin-bottom: 0.75rem;
+  }
 
-.cast-card p {
-  margin-bottom: 0.35rem;
-  font-size: 0.95rem;
-}
+  .cast-card p {
+    margin-bottom: 0.35rem;
+    font-size: 0.95rem;
+  }
 
-.character {
-  font-size: 0.8rem;
-  opacity: 0.75;
-}
+  .character {
+    font-size: 0.8rem;
+    opacity: 0.75;
+  }
 
-@media (max-width: 768px) {
-  .details-main {
-    flex-direction: column;
+  @media (max-width: 768px) {
+    .details-main {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .details-main .poster-image {
+      width: 220px;
+    }
+
+    .movie-genres {
+      justify-content: center;
+    }
+
+    .movie-overview {
+      max-width: 100%;
+    }
+  }
+
+  .loading {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  /* FOOTER */
+  .landing-footer {
+    min-height: 78px;
+    padding: 0 36px;
+    background: #0f172a;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
+    font-weight: 700;
+  }
+
+  .landing-footer p:nth-child(2) {
     text-align: center;
   }
 
-  .details-main .poster-image {
-    width: 220px;
+  .landing-footer p:nth-child(3) {
+    text-align: right;
   }
 
-  .movie-genres {
-    justify-content: center;
-  }
+  @keyframes loading {
+    from {
+      background-position: 200% 0;
+    }
 
-  .movie-overview {
-    max-width: 100%;
-  }
-}
-
-.loading {
-  text-align: center;
-  margin-top: 2rem;
-}
-
-/* FOOTER */
-.landing-footer {
-  min-height: 78px;
-  padding: 0 36px;
-  background: #0f172a;
-  color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  align-items: center;
-  font-weight: 700;
-}
-
-.landing-footer p:nth-child(2) {
-  text-align: center;
-}
-
-.landing-footer p:nth-child(3) {
-  text-align: right;
-}
-
-@keyframes loading {
-  from {
-    background-position: 200% 0;
-  }
-
-  to {
-    background-position: -200% 0;
+    to {
+      background-position: -200% 0;
+    }
   }
 }

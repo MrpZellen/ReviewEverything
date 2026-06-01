@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import "./style/moviedetails.css";
 import WriteReviewForm from "../components/reviews/WriteReviews";
 import OtherReviews from "../components/reviews/OtherReviews";
@@ -51,6 +51,12 @@ export default function MovieDetails() {
     }
 
     const backdropImage = movie.backdrop_path || movie.poster_path;
+    const utisRelease = movie.release_dates?.results?.find(
+        (result: any) => result.iso_3166_1 ==="US"
+    );
+    const mpaRate = utisRelease?.release_dates?.find(
+        (release: any) => release.certification !== ""
+    )?.certification || "NR";
 
     return (
         <main className="movie-details-page">
@@ -61,15 +67,15 @@ export default function MovieDetails() {
                 rgba(12, 12, 18, 0.78),
                 rgba(12, 12, 18, 0.95)
             ), url(https://image.tmdb.org/t/p/original${backdropImage})`,
-                }}
-            >
-                <div className="movie-hero-inner">
-                    <button
-                        className="back-button"
-                        onClick={() => navigate(-1)}
-                    >
-                        ← Back
-                    </button>
+            }}
+        >
+            <div className="movie-hero-inner page-width">
+            <button
+                className="back-button"
+                onClick={() => navigate(-1)}
+                >
+                ← Back
+            </button>
 
                     <div className="details-main">
                         <img
@@ -87,11 +93,12 @@ export default function MovieDetails() {
                                 <p className="movie-tagline">“{movie.tagline}”</p>
                             )}
 
-                            <p className="movie-release">
-                                {movie.release_date || "Unknown release date"} •{" "}
-                                {movie.runtime ? `${movie.runtime} min` : "Runtime unavailable"} •{" "}
-                                ⭐ {movie.vote_average?.toFixed(1) || "N/A"}/10
-                            </p>
+                <p className="movie-release">
+                    <span className="rating-badge">{mpaRate}</span> •{" "}
+                    {movie.release_date || "Unknown release date"} •{" "}
+                    {movie.runtime ? `${movie.runtime} min` : "Runtime unavailable"} •{" "}
+                    ⭐ {movie.vote_average?.toFixed(1) || "N/A"}/10
+                </p>
 
                             <div className="movie-genres">
                                 {movie.genres?.map((genre: any) => (
