@@ -157,7 +157,6 @@ export default function SearchPage() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                 />
-
                 <select
                     className="neon-select"
                     value={selectedGenre}

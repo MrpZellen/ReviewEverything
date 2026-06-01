@@ -56,10 +56,18 @@ export default function Navbar() {
         >
           Reviews
         </NavLink>
-        
+
+        <NavLink to="/profile" className={({ isActive }) =>
+          isActive ? "nav-link active" : "nav-link"
+        }
+        >
+          Profile
+        </NavLink>
+
       </div>
 
       <button className="signin-btn">Sign In</button>
+
     </nav>
   );
 }
