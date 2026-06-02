@@ -80,15 +80,28 @@ async function getAllUserReviewsByRating(userID, rating) {
 async function addReviewForUser(allData) {
     await mongoose.connect(uri);
 
+    // const newReview = new UserReview({
+    //     userID: allData.userID,
+    //     username: allData.username || "Reviewer Name",
+    //     title: allData.title,
+    //     content: allData.reviewText,
+    //     movieID: allData.movieID,
+    //     rating: allData.rating,
+    //     thumbsDown: 0,
+    //     thumbsUp: 0,
+    // });
+
     const newReview = new UserReview({
-        userID: allData.userID,
+        userID: String(allData.userID),
         username: allData.username || "Reviewer Name",
         title: allData.title,
         content: allData.reviewText,
-        movieID: allData.movieID,
+        movieID: String(allData.movieID),
         rating: allData.rating,
-        thumbsDown: 0,
-        thumbsUp: 0,
+
+        likedBy: [],
+        dislikedBy: [],
+        comments: [],
     });
 
     const result = await newReview.save();
@@ -96,6 +109,8 @@ async function addReviewForUser(allData) {
 
     return result._id;
 }
+
+
 
 
 async function updateReviewForUser(allData) {
@@ -136,12 +151,58 @@ async function getAllReviews() {
     return reviews;
 }
 
-// async function getAllReviews() {
-//     await mongoose.connect(uri);
-//     const listOfReviews = await UserReview.find().exec();
-//     await mongoose.disconnect();
-//     return listOfReviews;
-// }
+// New functions for toggling likes and adding comments
+async function toggleLikeReview(reviewID, userID) {
+    await mongoose.connect(uri);
+
+    const review = await UserReview.findById(reviewID);
+
+    if (!review) {
+        await mongoose.disconnect();
+        return null;
+    }
+
+    review.likedBy = review.likedBy || [];
+    review.dislikedBy = review.dislikedBy || [];
+
+    const user = String(userID);
+    const hasLiked = review.likedBy.includes(user);
+
+    if (hasLiked) {
+        review.likedBy = review.likedBy.filter((id) => id !== user);
+    } else {
+        review.likedBy.push(user);
+        review.dislikedBy = review.dislikedBy.filter((id) => id !== user);
+    }
+
+    await review.save();
+    await mongoose.disconnect();
+
+    return review;
+}
+
+async function addCommentToReview(reviewID, commentData) {
+    await mongoose.connect(uri);
+
+    const review = await UserReview.findById(reviewID);
+
+    if (!review) {
+        await mongoose.disconnect();
+        return null;
+    }
+
+    review.comments = review.comments || [];
+
+    review.comments.push({
+        userID: String(commentData.userID),
+        username: commentData.username || "Reviewer Name",
+        comment: commentData.comment,
+    });
+    await review.save();
+    await mongoose.disconnect();
+
+    return review;
+}
 
 
 
@@ -161,5 +222,7 @@ export {
     updateReviewForUser,
     rateReview,
     deleteReview,
-    getAllReviews
+    getAllReviews,
+    toggleLikeReview,
+    addCommentToReview
 };

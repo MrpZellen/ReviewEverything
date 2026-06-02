@@ -1,24 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import "./style/moviedetails.css";
 import WriteReviewForm from "../components/reviews/WriteReviews";
 import OtherReviews from "../components/reviews/OtherReviews";
-import { useNavigate } from "react-router-dom";
 
 export default function MovieDetails() {
     const { id } = useParams();
-    const [movie, setMovie] = useState<any>(null);
-    const [reviews, setReviews] = useState<any>([]);
-    const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
     const navigate = useNavigate();
+
+    const [movie, setMovie] = useState<any>(null);
     const [reviewRefreshKey, setReviewRefreshKey] = useState(0);
+
+    const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
 
     useEffect(() => {
         async function fetchMovie() {
             try {
                 const res = await fetch(
-                    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=credits`
+                    `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=credits,release_dates`
                 );
 
                 const data = await res.json();
@@ -31,32 +31,20 @@ export default function MovieDetails() {
         if (id) fetchMovie();
     }, [id, API_KEY]);
 
-    useEffect(() => {
-        const fetchReviews = async () => {
-            try {
-                const res = await fetch(
-                    `http://localhost:3100/api/movies/reviews?movieID=${id}`
-                );
-                const data = await res.json();
-                setReviews(data.reviews);
-            } catch (err) {
-                console.error('Failed, its joever', err);
-            }
-        };
-        fetchReviews();
-    }, [id]);
-
     if (!movie) {
         return <p className="loading">Loading movie details...</p>;
     }
 
     const backdropImage = movie.backdrop_path || movie.poster_path;
-    const utisRelease = movie.release_dates?.results?.find(
+
+    const usRelease = movie.release_dates?.results?.find(
         (result: any) => result.iso_3166_1 === "US"
     );
-    const mpaRate = utisRelease?.release_dates?.find(
-        (release: any) => release.certification !== ""
-    )?.certification || "NR";
+
+    const mpaRate =
+        usRelease?.release_dates?.find(
+            (release: any) => release.certification !== ""
+        )?.certification || "NR";
 
     return (
         <main className="movie-details-page">
@@ -64,16 +52,13 @@ export default function MovieDetails() {
                 className="movie-hero"
                 style={{
                     backgroundImage: `linear-gradient(
-                rgba(12, 12, 18, 0.78),
-                rgba(12, 12, 18, 0.95)
-            ), url(https://image.tmdb.org/t/p/original${backdropImage})`,
+            rgba(12, 12, 18, 0.78),
+            rgba(12, 12, 18, 0.95)
+          ), url(https://image.tmdb.org/t/p/original${backdropImage})`,
                 }}
             >
                 <div className="movie-hero-inner page-width">
-                    <button
-                        className="back-button"
-                        onClick={() => navigate(-1)}
-                    >
+                    <button className="back-button" onClick={() => navigate(-1)}>
                         ← Back
                     </button>
 
@@ -113,31 +98,11 @@ export default function MovieDetails() {
                                 {movie.overview || "No description available."}
                             </p>
                         </div>
-                        {(reviews.length !== 0) && (
-                            <div className="review-section">
-                                <h2>Reviews</h2>
-                                <div className="review-grid">
-                                    {reviews.map((review: any) => (
-                                        <div key={review.movieID} className="review-card">
-                                            <p className="review-supertext">{review.title} - <strong>{review.rating}</strong></p>
-                                            <p className="review-subtext">Reviewed by: {review.username}</p>
-                                            <p>{review.content}</p>
-                                            <p className="review-subtext">ThumbsUp: {review.thumbsUp}, ThumbsDown: {review.thumbsDown}</p>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-                        {!(reviews.length !== 0) && (
-                            <div className="review-errorcard">
-                                <p className="review-errortext"><strong>NO REVIEWS AVAILABLE FOR THIS MOVIE CURRENTLY</strong></p>
-                            </div>
-                        )}
                     </div>
                 </div>
             </section>
 
-            <section className="cast-section">
+            <section className="cast-section page-width">
                 <div className="section-header">
                     <p className="eyebrow">Featured Cast</p>
                     <h2>Cast</h2>
@@ -145,7 +110,12 @@ export default function MovieDetails() {
 
                 <div className="cast-grid">
                     {movie.credits?.cast?.map((actor: any) => (
-                        <Link to={`/actor/${actor.id}`} state={{ from: `/movie/${id}` }} key={actor.cast_id || actor.id} className="cast-card">
+                        <Link
+                            to={`/actor/${actor.id}`}
+                            state={{ from: `/movie/${id}` }}
+                            key={actor.cast_id || actor.id}
+                            className="cast-card"
+                        >
                             {actor.profile_path ? (
                                 <img
                                     src={`https://image.tmdb.org/t/p/w200${actor.profile_path}`}
@@ -162,7 +132,7 @@ export default function MovieDetails() {
                 </div>
             </section>
 
-            <section className="review-compose-section">
+            <section className="review-compose-section page-width">
                 <div className="review-preview-card">
                     <img
                         src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
