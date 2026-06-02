@@ -80,3 +80,69 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+.like-button {
+  margin-top: 1rem;
+  border: 1px solid #ff00ff;
+  background: transparent;
+  color: white;
+  padding: 0.5rem 0.8rem;
+  cursor: pointer;
+  box-shadow: 0 0 8px rgba(255, 0, 255, 0.4);
+}
+
+.like-button.liked {
+  background: #ff00ff;
+  color: white;
+}
+
+.comment-thread {
+  margin-top: 1.25rem;
+  border-top: 1px solid rgba(0, 255, 255, 0.25);
+  padding-top: 1rem;
+}
+
+.comment-thread h3,
+.comment-thread h4 {
+  color: #00ffff;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.comment {
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 3px solid #00ffff;
+  padding: 0.65rem;
+  margin-bottom: 0.65rem;
+}
+
+.comment strong {
+  color: white;
+  font-size: 0.8rem;
+}
+
+.comment p {
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+}
+
+.comment-thread form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.comment-thread input {
+  flex: 1;
+  background: #05050a;
+  border: 1px solid #00ffff;
+  color: white;
+  padding: 0.55rem;
+}
+
+.comment-thread form button {
+  border: 1px solid #ff00ff;
+  background: #ff00ff;
+  color: white;
+  padding: 0.55rem 0.8rem;
+  cursor: pointer;
+}

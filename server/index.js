@@ -1,6 +1,6 @@
 import {
     addReviewForUser, updateReviewForUser, deleteReview, getAllReviewsByMovie, getAllReviewsByUser, getAllMovieReviewsByRating,
-    getAllUserReviewsByRating, rateReview, getAllReviews
+    getAllUserReviewsByRating, rateReview, getAllReviews, toggleLikeReview, addCommentToReview
 } from './data/review-DAL.js';
 import express from 'express';
 import cors from 'cors';
@@ -80,6 +80,38 @@ app.delete('/api/user/reviews', async (req, res) => {
     const result = await deleteReview(reviewID)
     res.json({ 'posted': result })
 })
+
+// New endpoints for toggling like and adding comments
+app.patch("/api/reviews/:reviewID/like", async (req, res) => {
+    try {
+        const review = await toggleLikeReview(req.params.reviewID, req.body.userID);
+
+        if (!review) {
+            return res.status(404).json({ message: "Review not found" });
+        }
+
+        res.json({ review });
+    } catch (error) {
+        console.error("Toggle like failed:", error);
+        res.status(500).json({ message: "Failed to update like." });
+    }
+});
+
+app.post("/api/reviews/:reviewID/comments", async (req, res) => {
+    try {
+        const review = await addCommentToReview(req.params.reviewID, req.body);
+
+        if (!review) {
+            return res.status(404).json({ message: "Review not found" });
+        }
+
+        res.json({ review });
+    } catch (error) {
+        console.error("Add comment failed:", error);
+        res.status(500).json({ message: "Failed to add comment." });
+    }
+});
+
 
 // Only start server if this file is run directly (not imported for tests)
 if (import.meta.url === `file://${process.argv[1]}`) {

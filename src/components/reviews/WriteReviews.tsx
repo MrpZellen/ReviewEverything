@@ -8,7 +8,7 @@ type WriteReviewsProps = {
 };
 
 const API_BASE = "http://localhost:3100/api";
-const DEMO_USER_ID = 1;
+const DEMO_USER_ID = '1';
 const MAX_REVIEW_LENGTH = 3000;
 
 export default function WriteReviews({ movieID, onReviewCreated }: WriteReviewsProps) {
