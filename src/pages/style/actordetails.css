@@ -4,7 +4,9 @@
 }
 
 .actor-page {
-    height: calc(100vh - 80px);
+    /* height: calc(100vh - 80px); */
+    min-height: 100vh;
+    overflow-x: hidden;
     background: var(--bg-main);
     color: var(--text-main);
 }
@@ -13,8 +15,7 @@
     width: 100%;
     background-size: cover;
     background-position: center;
-    display: flex;
-    align-items: center;
+    display: block;
     position: relative;
 }
 
@@ -102,6 +103,7 @@
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 20px;
     width: 100%;
+    align-items: start;
 }
 
 .movie-card {
@@ -117,8 +119,8 @@
         box-shadow 0.2s ease;
     display: flex;
     flex-direction: column;
-    height: 100%;
     min-height: 0;
+    min-width: 0;
 }
 
 .movie-card:hover {
@@ -134,7 +136,7 @@
     aspect-ratio: 2 / 3;
     object-fit: cover;
     background: #2b2b38;
-    display: grid;
+    display: block;
     place-items: center;
     color: #aaa;
     border-bottom: 2px solid #ff00ff;

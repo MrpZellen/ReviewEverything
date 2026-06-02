@@ -144,7 +144,7 @@ export default function MovieDetails() {
                 </div>
 
                 <div className="cast-grid">
-                    {movie.credits?.cast?.slice(0, 12).map((actor: any) => (
+                    {movie.credits?.cast?.map((actor: any) => (
                         <Link to={`/actor/${actor.id}`} state={{ from: `/movie/${id}` }} key={actor.cast_id || actor.id} className="cast-card">
                             {actor.profile_path ? (
                                 <img
