@@ -4,15 +4,28 @@ import { Link } from "react-router-dom";
 
 export default function ProfilePage() {
     const [activeTab, setActiveTab] = useState("reviews");
-    const user = {
+    type User {
+        username: string,
+        joined: string,
+        bio: string,
+        avatar?: string,
+        stats: {
+            totalReviews: number,
+            totalLiked: number,
+            avgRating: number,
+        };
+    };
+    const user: User = {
         // mock data
         username: "I<3Moviez",
         joined: "May 2026",
         bio:"I love animation movies!",
         avatar: "",
-        totalReviews: 10,
-        totalLiked: 6,
-        avgRating: 8.2,
+        stats: {
+            totalReviews: 10,
+            totalLiked: 6,
+            avgRating: 8.2,
+        }
     };
     return (
         <div className="profile-header profile-page">
@@ -29,9 +42,9 @@ export default function ProfilePage() {
                     <p>Joined: {user.joined}</p>
                     <p>{user.bio}</p>
                     <div className="stats">
-                        <div>Reviews: {user.totalReviews}</div>
-                        <div>Liked: {user.totalLiked}</div>
-                        <div>Average Rating: {user.avgRating}</div>
+                        <div>Reviews: {user.stats.totalReviews}</div>
+                        <div>Liked: {user.stats.totalLiked}</div>
+                        <div>Average Rating: {user.stats.avgRating}</div>
                     </div>
                 </div>
             </div>
