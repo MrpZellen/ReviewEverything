@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function ProfilePage() {
     const [activeTab, setActiveTab] = useState("reviews");
-    type User {
+    type User = {
         username: string,
         joined: string,
         bio: string,
@@ -13,93 +13,121 @@ export default function ProfilePage() {
             totalReviews: number,
             totalLiked: number,
             avgRating: number,
-        };
+        },
+        reviews: [],
+        ratings: [],
+        likes: [],
     };
     const user: User = {
         // mock data
         username: "I<3Moviez",
         joined: "May 2026",
-        bio:"I love animation movies!",
+        bio: "I love animation movies!",
         avatar: "",
         stats: {
             totalReviews: 10,
             totalLiked: 6,
             avgRating: 8.2,
-        }
+        },
+        reviews: [],
+        ratings: [],
+        likes: [],
     };
     return (
-        <div className="profile-header profile-page">
-            <div className="profile-header neon-card">
-                <div className="avatar">
-                    {user.avatar ? (
-                        <img src={user.avatar} alt="avatar"/>
-                    ): (
-                        <div className="avatar-placeholder">👤</div>
-                    )}
-                </div>
-                <div className="profile-info">
-                    <h1 className="page-title">{user.username}</h1>
-                    <p>Joined: {user.joined}</p>
-                    <p>{user.bio}</p>
-                    <div className="stats">
-                        <div>Reviews: {user.stats.totalReviews}</div>
-                        <div>Liked: {user.stats.totalLiked}</div>
-                        <div>Average Rating: {user.stats.avgRating}</div>
+        <div className="profile-page">
+            <div className="profile-banner neon-card">
+                <div className="profile-header">
+                    <div className="avatar">
+                        {user.avatar && user.avatar.length > 0 ? (
+                            <img src={user.avatar} alt={user.username} />
+                        ) : (
+                            <div className="avatar-placeholder">
+                                {user.username.charAt(0)}
+                            </div>
+                        )}
                     </div>
-                </div>
-            </div>
-            <div className="tabs">
-                <button onClick={() => setActiveTab("reviews")} className="neon-button">Reviews</button>
-                <button onClick={() => setActiveTab("ratings")} className="neon-button">Ratings</button>
-                <button onClick={() => setActiveTab("likes")} className="neon-button">Liked Movies</button>
-            </div>
-            {activeTab === "reviews" && (
-                <div className="section">
-                    <h2 className="section-title">Your Reviews</h2>
-                    <div className="list">
-                        <div className="item neon-card">
-                            <img className="poster" src="https://image.tmdb.org/t/p/w200/placeholder.jpg"/>
-                            <div>
-                                <h3>Movie Title</h3>
-                                <p>"Amaaaazing!!"</p>
-                                <span>8/10</span>
-                                <div className="actions">
-                                    <button className="sml-btn">Edit</button>
-                                    <button className="sml-btn danger">Delete</button>
-                                </div>
+                    <div className="profile-info">
+                        <p className="joined-text">Joined: {user.joined}</p>
+                        <h1 className="page-title">{user.username}</h1>
+                        <p className="profile-bio">{user.bio}</p>
+
+                        <div className="stats-grid">
+                            <div className="stat-card">
+                                <span className="stat-value">{user.stats.totalReviews}</span>
+                                <span className="stat-label">Reviews</span>
+                            </div>
+                            <div className="stat-card">
+                                <span className="stat-value">{user.stats.totalLiked}</span>
+                                <span className="stat-label">Likes</span>
+                            </div>
+                            <div className="stat-card">
+                                <span className="stat-value">{user.stats.avgRating}</span>
+                                <span className="stat-label">Avg Rating</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            )}
-            {/* Add Ratings and Likes Here */}
-            {activeTab === "ratings" && (
-                <div className="section">
-                    <h2 className="section-title">Your Ratings</h2>
-                    <div className="auto-grid">
-                        <div className="neon-card rating-card">
-                            <img className="poster" src="https://image.tmdb.org/t/p/w200/placeholder.jpg"/>
-                            <p>Movie Title</p>
-                            <p>5/10</p>
-                        </div>
-                    </div>
+                <div className="tabs">
+                    <button onClick={() => setActiveTab("reviews")} className={activeTab === "reviews" ? "tab-button active" : "tab-button"}>Reviews</button>
+                    <button onClick={() => setActiveTab("ratings")} className={activeTab === "ratings" ? "tab-button active" : "tab-button"}>Ratings</button>
+                    <button onClick={() => setActiveTab("likes")} className={activeTab === "likes" ? "tab-button active" : "tab-button"}>Liked Movies</button>
                 </div>
-            )}
-            {activeTab === "likes" && (
-                <div className="section">
-                    <h2 className="section-title">Liked Movies</h2>
-                    <div className="auto-grid">
-                        <Link to="/movie/1" className="neon-card rating-card">
-                            <img className="poster" src="https://image.tmdb.org/t/p/w200/placeholder.jpg"/>
-                            <p>Movie Title</p>
-                        </Link>
+                {activeTab === "reviews" && (
+                    <div className="section">
+                        <h2 className="section-title">Your Reviews</h2>
+                        {user.reviews.length === 0 ? (
+                            <div className="empty-state neon-card">
+                                <div className="empty-icon">✎𓂃</div>
+                                <h3>No Reviews</h3>
+                                <p>Share your thoughts on a movie and start building your profile</p>
+                                <Link to="/search" className="empty-action">Find a Movie</Link>
+                            </div>
+                        ) : (
+                            <div className="list">
+                                Reviews Go Here
+                            </div>
+                        )}
                     </div>
+                )}
+                {/* Add Ratings and Likes Here */}
+                {activeTab === "ratings" && (
+                    <div className="section">
+                        <h2 className="section-title">Your Ratings</h2>
+                        {user.ratings.length === 0 ? (
+                            <div className="empty-state neon-card">
+                                <div className="empty-icon">★★★★★</div>
+                                <h3>No Ratings</h3>
+                                <p>Rate some movies to see your favorites and average score</p>
+                                <Link to="/search" className="empty-action">Find a Movie</Link>
+                            </div>
+                        ) : (
+                            <div className="auto-grid">
+                                Rating Go Here
+                            </div>
+                        )}
+                    </div>
+                )}
+                {activeTab === "likes" && (
+                    <div className="section">
+                        <h2 className="section-title">Liked Movies</h2>
+                        {user.likes.length === 0 ? (
+                            <div className="empty-state neon-card">
+                                <div className="empty-icon">🖒</div>
+                                <h3>No Liked Movies</h3>
+                                <p>Tap the like button on a movie to save it to your profile</p>
+                            </div>
+                        ) : (
+                            <div className="auto-grid">
+                                Likes Go Here
+                            </div>
+                        )}
+                    </div>
+                )}
+                <div className="actions-bar">
+                    <button className="action-button">Edit Profile</button>
+                    <button className="action-button danger">Delete Account</button>
+                    <button className="action-button">Logout</button>
                 </div>
-            )}
-            <div className="actions-bar">
-                <button className="neon-button">Edit Profile</button>
-                <button className="neon-button danger">Delete Account</button>
-                <button className="neon-button">Logout</button>
             </div>
         </div>
     );
